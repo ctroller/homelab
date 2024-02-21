@@ -1,11 +1,12 @@
+# {{ ansible_managed }}
 # Configure Mimir to use Minio as object storage backend.
 common:
   storage:
     backend: s3
     s3:
       endpoint: minio:9000
-      access_key_id: mimir
-      secret_access_key: supersecret
+      access_key_id: {{ monitoring_mimir_root_user }}
+      secret_access_key: {{ monitoring_mimir_root_password }}
       insecure: true
       bucket_name: mimir
 

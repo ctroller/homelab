@@ -4,7 +4,9 @@
     org_name: 'Homelab'
     pip_install_packages:
       - name: docker
-
+  
+  vars_files:
+    - ../../.vault
 
   roles:
     - geerlingguy.docker

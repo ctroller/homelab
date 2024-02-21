@@ -3,14 +3,23 @@
     src: files/
     dest: "{{ stack_location }}"
 
+- name: Template Directory structure
+  ansible.builtin.file:
+    state: directory
+    dest: "{{ stack_location }}/{{ item.path }}"
+  with_community.general.filetree: "templates/"
+  when: item.state == 'directory'
 
-- name: Configure prometheus 
-  ansible.builtin.template: 
-    src: files/prometheus/prometheus.yml.j2
-    dest: "{{ stack_location }}/prometheus/prometheus.yml"
+- name: Template files
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ stack_location }}/{{ item.path | regex_replace('\\.j2$', '') }}"
+    force: yes
+  with_community.general.filetree: "templates/"
+  when: item.state == 'file'
 
-- name: Deploy compose stack
-  community.docker.docker_compose_v2:
-    project_src: "{{ stack_location }}"
-    recreate: always
-
+- name: Clean up
+  ansible.builtin.file:
+    path: "{{ stack_location }}"
+    state: absent
+  with_community.general.filetree: "{{ stack_location }}"

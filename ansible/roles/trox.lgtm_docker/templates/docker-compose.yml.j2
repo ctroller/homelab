@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 version: "3.8"
 services:
   minio:
@@ -9,8 +11,8 @@ services:
       - "9000:9000"
       - "9001:9001"
     environment:
-      - MINIO_ROOT_USER=mimir
-      - MINIO_ROOT_PASSWORD=supersecret
+      - MINIO_ROOT_USER={{ monitoring_mimir_root_user }}
+      - MINIO_ROOT_PASSWORD={{ monitoring_mimir_root_password }}
     volumes:
       - minio-data:/data
 
