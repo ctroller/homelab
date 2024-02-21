@@ -2,7 +2,7 @@ version: "3.8"
 services:
   minio:
     image: minio/minio
-    container_name: mimir
+    container_name: minio
     entrypoint: [""]
     command: ["sh", "-c", "mkdir -p /data/mimir && minio server --quiet /data --console-address \":9001\""]
     ports:
@@ -14,9 +14,9 @@ services:
     volumes:
       - minio-data:/data
 
-  mimir-1:
+  mimir:
     image: grafana/mimir
-    container_name: mimir-1
+    container_name: mimir
     command: ["-config.file=/etc/mimir.yml"]
     ports:
       - "9009:9009"

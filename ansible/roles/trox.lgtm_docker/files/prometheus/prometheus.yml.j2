@@ -1,7 +1,9 @@
+# {{ ansible_managed }}
+
 scrape_configs:
   - job_name: mimir
     static_configs:
-      - targets: ["mimir:9009"]
+      - targets: ["mimir:8080"]
 
   - job_name: cadvisor
     static_configs:
