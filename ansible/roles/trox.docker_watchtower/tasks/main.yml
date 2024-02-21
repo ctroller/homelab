@@ -1,0 +1,7 @@
+- name: Create container
+  community.docker.docker_container:
+    name: watchtower
+    image: "ghcr.io/containrrr/watchtower"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    state: started

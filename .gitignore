@@ -1,0 +1,4 @@
+.idea/
+*.iml
+.vscode/
+ansible/inventory/hosts

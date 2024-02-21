@@ -1,0 +1,7 @@
+- name: Manages Docker
+  hosts: docker
+  become: true
+  roles: 
+    - geerlingguy.docker
+    - ome.cadvisor
+    - trox.docker_watchtower
