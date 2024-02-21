@@ -1,0 +1,14 @@
+- name: Manage Media Server
+  hosts: mediaserver
+  become: yes
+
+  roles:
+    - geerlingguy.docker
+    - trox.mediaserver
+
+  vars_prompt:
+    - name: gluetun_vpn_user
+      prompt: VPN Username
+      private: false
+    - name: gluetun_vpn_password
+      prompt: VPN Password

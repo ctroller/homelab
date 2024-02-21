@@ -1,0 +1,9 @@
+- name: Copy files
+  ansible.builtin.copy:
+    src: files/
+    dest: "{{ docker_project_dir }}"
+
+- name: Start compose
+  community.docker.docker_compose:
+    project_src: "{{ docker_project_dir }}"
+    state: present

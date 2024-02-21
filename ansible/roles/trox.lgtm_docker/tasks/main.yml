@@ -1,0 +1,16 @@
+- name: Copy files
+  ansible.builtin.copy:
+    src: files/
+    dest: "{{ stack_location }}"
+
+
+- name: Configure prometheus 
+  ansible.builtin.template: 
+    src: files/prometheus/prometheus.yml.j2
+    dest: "{{ stack_location }}/prometheus/prometheus.yml"
+
+- name: Deploy compose stack
+  community.docker.docker_compose_v2:
+    project_src: "{{ stack_location }}"
+    recreate: always
+

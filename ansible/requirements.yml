@@ -1,5 +1,8 @@
+roles:
 - src: geerlingguy.docker
-  version: 7.1.0
-
+- src: geerlingguy.pip
 - src: ome.cadvisor
-  version: 0.5.0
+
+collections:
+  - community.docker
+  - prometheus.prometheus

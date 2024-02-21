@@ -1,0 +1,13 @@
+- name: Loki Grafana Turbo Mimir stack management
+  hosts: monitoring
+  vars:
+    org_name: 'Homelab'
+    pip_install_packages:
+      - name: docker
+
+
+  roles:
+    - geerlingguy.docker
+    - trox.docker_watchtower
+    - geerlingguy.pip
+    - trox.lgtm_docker

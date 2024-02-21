@@ -1,0 +1,11 @@
+scrape_configs:
+  - job_name: mimir
+    static_configs:
+      - targets: ["mimir:9009"]
+
+  - job_name: cadvisor
+    static_configs:
+      - targets:
+{% for host in groups['docker'] %}
+        - {{ host }}:9100
+{% endfor %}

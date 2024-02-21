@@ -1,0 +1,4 @@
+- name: Manages Monitoring agents on all hosts
+  hosts: all
+  roles:
+    - prometheus.prometheus.node_exporter

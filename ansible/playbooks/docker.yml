@@ -3,5 +3,5 @@
   become: true
   roles: 
     - geerlingguy.docker
-    - ome.cadvisor
+    - prometheus.prometheus.cadvisor
     - trox.docker_watchtower
