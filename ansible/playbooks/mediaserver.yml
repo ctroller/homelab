@@ -4,7 +4,13 @@
 
   roles:
     - geerlingguy.docker
+    - geerlingguy.pip
+    - trox.docker_watchtower
     - trox.mediaserver
+
+  vars:
+    pip_install_packages:
+      - name: docker
 
   vars_prompt:
     - name: gluetun_vpn_user
