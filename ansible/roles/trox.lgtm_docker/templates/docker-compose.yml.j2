@@ -7,14 +7,12 @@ services:
     container_name: minio
     entrypoint: [""]
     command: ["sh", "-c", "mkdir -p /data/mimir && minio server --quiet /data --console-address \":9001\""]
-    ports:
-      - "9000:9000"
-      - "9001:9001"
     environment:
       - MINIO_ROOT_USER={{ monitoring_mimir_root_user }}
       - MINIO_ROOT_PASSWORD={{ monitoring_mimir_root_password }}
     volumes:
       - minio-data:/data
+    restart: unless-stopped
 
   mimir:
     image: grafana/mimir
@@ -24,6 +22,7 @@ services:
       - "9009:9009"
     volumes:
       - ./mimir/mimir.yml:/etc/mimir.yml
+    restart: unless-stopped
 
   prometheus:
     image: prom/prometheus
@@ -36,6 +35,7 @@ services:
       - ./prometheus/rules/:/etc/prometheus/rules/
     ports:
       - "9090:9090"
+    restart: unless-stopped
 
   grafana:
     image: grafana/grafana
@@ -47,6 +47,7 @@ services:
       - grafana-data:/var/lib/grafana
     depends_on:
       - prometheus
+    restart: unless-stopped
 
 volumes:
   grafana-data:

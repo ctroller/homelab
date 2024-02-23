@@ -13,6 +13,7 @@ scrape_configs:
 {% endfor %}
 
   - job_name: node_exporter
+    scrape_timeout: 1m
     static_configs:
       - targets:
 {% for host in groups['all'] %}
