@@ -2,6 +2,7 @@ roles:
 - src: geerlingguy.docker
 - src: geerlingguy.pip
 - src: ome.cadvisor
+- src: fauust.mariadb
 
 collections:
   - community.docker

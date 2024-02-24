@@ -1,0 +1,5 @@
+- name: Manage MariaDB instances
+  hosts: mariadb
+  roles:
+    - fauust.mariadb
+    - prometheus.prometheus.mysqld_exporter

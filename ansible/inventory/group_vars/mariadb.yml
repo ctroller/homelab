@@ -1,0 +1,10 @@
+mysqld_exporter_username: "exporter"
+mysqld_exporter_password: "exporter"
+
+mariadb_users:
+  - name: "{{ mysqld_exporter_username }}"
+    host: "localhost"
+    password: "{{ mysqld_exporter_password }}"
+    priv: "*.*:PROCESS,REPLICATION CLIENT"
+    state: present
+

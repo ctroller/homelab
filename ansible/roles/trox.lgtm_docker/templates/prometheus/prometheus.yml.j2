@@ -19,3 +19,10 @@ scrape_configs:
 {% for host in groups['all'] %}
         - {{ host }}:9100
 {% endfor %}
+
+  - job_name: mysqld_exporter
+    static_configs:
+      - targets:
+{% for host in groups['mariadb'] %}
+        - {{ host }}:9104
+{% endfor %}
