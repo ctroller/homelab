@@ -1,6 +1,28 @@
 # {{ ansible_managed }}
 
+global:
+  scrape_interval: 30s
+  scrape_timeout: 30s
+
+rule_files: 
+  - 'rules/*.yml'
+
+alerting:
+  alertmanagers:
+    - static_configs:
+      - targets:
+        - alertmanager:9093
+
 scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets:
+        - localhost:9090
+  - job_name: 'alertmanager'
+    static_configs:
+      - targets:
+        - alertmanager:9093
+
   - job_name: mimir
     static_configs:
       - targets: ["mimir:8080"]
@@ -13,7 +35,6 @@ scrape_configs:
 {% endfor %}
 
   - job_name: node_exporter
-    scrape_timeout: 1m
     static_configs:
       - targets:
 {% for host in groups['all'] %}

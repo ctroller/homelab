@@ -2,3 +2,11 @@
   hosts: all
   roles:
     - prometheus.prometheus.node_exporter
+  vars:
+    node_exporter_enabled_collectors:
+      - systemd
+      - textfile:
+          directory: "{{ node_exporter_textfile_dir }}"
+      - filesystem:
+          ignored-mount-points: ^/(dev|proc|sys|var/lib/docker/(containers|devicemapper)/.+)($|/)
+          ignored-fs-types: "^(sys|proc|auto|temp|ram|ns)fs$"
