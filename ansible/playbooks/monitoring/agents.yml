@@ -8,5 +8,5 @@
       - textfile:
           directory: "{{ node_exporter_textfile_dir }}"
       - filesystem:
-          ignored-mount-points: ^/(dev|proc|sys|var/lib/docker/(containers|devicemapper)/.+)($|/)
-          ignored-fs-types: "^(sys|proc|auto|temp|ram|ns)fs$"
+          ignored-mount-points: ^/(dev|proc|sys|var/lib/docker/(containers|devicemapper|overlay2)/.+)($|/)
+          ignored-fs-types: "^(sys|proc|auto|te?mp|ram|ns)fs$"
