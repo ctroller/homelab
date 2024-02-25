@@ -1,0 +1,17 @@
+- name: Prepare files
+  ansible.builtin.copy:
+    src: files/
+    dest: /srv/docker/grafana_agent/
+
+- name: Create container
+  community.docker.docker_container:
+    name: grafana_agent
+    image: "grafana/agent"
+    command: ["run", "--server.http.listen-addr=0.0.0.0:12345", "/etc/agent/config.river"]
+    env:
+      AGENT_MODE: flow
+    volumes:
+      - "/srv/docker/grafana_agent/:/etc/agent/"
+    ports:
+      - "12345:12345"
+    state: started

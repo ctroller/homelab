@@ -1,8 +1,14 @@
 - name: Manages Monitoring agents on all hosts
   hosts: all
   roles:
+    - geerlingguy.docker
+    - geerlingguy.pip
     - prometheus.prometheus.node_exporter
+    - trox.docker_grafana_agent
   vars:
+    pip_install_packages:
+      - name: docker
+
     node_exporter_enabled_collectors:
       - systemd
       - textfile:
