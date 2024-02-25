@@ -12,6 +12,9 @@
       AGENT_MODE: flow
     volumes:
       - "/srv/docker/grafana_agent/:/etc/agent/"
+      - "/var/log/:/var/host_log/"
+      - "/var/run/docker.sock:/var/run/docker.sock"
     ports:
       - "12345:12345"
     state: started
+    recreate: true
