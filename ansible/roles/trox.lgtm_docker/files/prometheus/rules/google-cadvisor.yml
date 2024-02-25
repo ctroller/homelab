@@ -6,7 +6,7 @@ groups:
 
     - alert: ContainerKilled
       expr: 'time() - container_last_seen > 60'
-      for: 0m
+      for: 2m
       labels:
         severity: warning
       annotations:
