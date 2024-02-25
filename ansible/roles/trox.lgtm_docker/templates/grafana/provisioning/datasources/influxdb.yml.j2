@@ -1,0 +1,14 @@
+# this does not appear to work with grafana at the moment.
+
+apiVersion: 1
+datasources:
+- name: InfluxDB-Flux
+  type: influxdb
+  access: proxy
+  url: http://influxdb:8086
+  jsonData:
+    httpMode: POST
+    organization: {{ influxdb_init_org }}
+    version: Flux
+  secureJsonData:
+    token: {{ influxdb_init_api_token }}
