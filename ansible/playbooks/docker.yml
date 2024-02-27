@@ -5,3 +5,15 @@
     - geerlingguy.docker
     - prometheus.prometheus.cadvisor
     - trox.docker_watchtower
+
+  tasks:
+    - name: Update cadvisor service template
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/system/cadvisor.service
+        line: "    '--raw_cgroup_prefix_whitelist=/docker/' \\"
+        insertafter: ".*--listen_ip=.*"
+    - name: Restart cadvisor
+      ansible.builtin.systemd:
+        name: cadvisor
+        daemon_reload: true
+        state: restarted
