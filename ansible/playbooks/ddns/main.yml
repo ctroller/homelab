@@ -1,0 +1,32 @@
+- name: Manage DDNS
+  hosts: ddns
+  vars_files:
+    - ../../.vault
+  vars:
+    ddns_domains:
+      ext.trox.dev:
+        - name: "@"
+          type: "A"
+        - name: "*"
+          type: "CNAME"
+          data: "@"
+      trox.dev:
+        - name: "cloud"
+          type: "CNAME"
+          data: "ext.trox.dev"
+  tasks:
+    - name: Copy config
+      ansible.builtin.template:
+        src: files/ddns.yml.j2
+        dest: /root/ddns.yml
+        mode: "0644"
+    - name: Create Docker container
+      community.docker.docker_container:
+        name: ddns
+        image: skibish/ddns
+        command: "-conf-file /config/ddns.yml"
+        volumes:
+          - "/root/ddns.yml:/config/ddns.yml"
+        restart_policy: unless-stopped
+        restart: true
+        state: started
