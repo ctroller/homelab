@@ -2,6 +2,7 @@
   ansible.builtin.copy:
     src: files/
     dest: /srv/docker/grafana_agent/
+    mode: "0644"
 
 - name: Create container
   community.docker.docker_container:
