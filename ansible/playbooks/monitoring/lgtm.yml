@@ -10,6 +10,6 @@
 
   roles:
     - geerlingguy.docker
-    - trox.docker_watchtower
     - geerlingguy.pip
-    - trox.lgtm_docker
+    - docker_watchtower
+    - docker_lgtm

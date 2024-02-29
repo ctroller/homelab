@@ -5,8 +5,8 @@
   roles:
     - geerlingguy.docker
     - geerlingguy.pip
-    - trox.docker_watchtower
-    - trox.mediaserver
+    - docker_watchtower
+    - mediaserver
 
   vars:
     pip_install_packages:

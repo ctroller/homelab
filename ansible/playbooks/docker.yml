@@ -4,7 +4,7 @@
   roles: 
     - geerlingguy.docker
     - prometheus.prometheus.cadvisor
-    - trox.docker_watchtower
+    - docker_watchtower
 
   tasks:
     - name: Update cadvisor service template

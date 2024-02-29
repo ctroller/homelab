@@ -2,6 +2,7 @@
   ansible.builtin.copy:
     src: files/
     dest: "{{ docker_project_dir }}"
+    mode: "0644"
 
 - name: Start compose
   community.docker.docker_compose:
