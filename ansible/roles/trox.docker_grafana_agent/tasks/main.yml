@@ -17,4 +17,5 @@
     ports:
       - "12345:12345"
     state: started
+    restart_policy: unless-stopped
     recreate: true

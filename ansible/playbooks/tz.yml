@@ -1,0 +1,6 @@
+- name: Set correct timezone
+  hosts: all
+  tasks:
+    - name: Set correct timezone
+      ansible.builtin.timezone:
+        name: Europe/Zurich

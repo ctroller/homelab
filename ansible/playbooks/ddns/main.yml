@@ -2,18 +2,6 @@
   hosts: ddns
   vars_files:
     - ../../.vault
-  vars:
-    ddns_domains:
-      ext.trox.dev:
-        - name: "@"
-          type: "A"
-        - name: "*"
-          type: "CNAME"
-          data: "@"
-      trox.dev:
-        - name: "cloud"
-          type: "CNAME"
-          data: "ext.trox.dev"
   tasks:
     - name: Copy config
       ansible.builtin.template:
