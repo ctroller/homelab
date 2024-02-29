@@ -1,7 +1,7 @@
 - name: Manages Docker
   hosts: docker
   become: true
-  roles: 
+  roles:
     - geerlingguy.docker
     - prometheus.prometheus.cadvisor
     - docker_watchtower
@@ -11,7 +11,7 @@
       ansible.builtin.lineinfile:
         path: /etc/systemd/system/cadvisor.service
         line: "    '--raw_cgroup_prefix_whitelist=/docker/' \\"
-        insertafter: ".*--listen_ip=.*"
+        insertafter: '.*--listen_ip=.*'
     - name: Restart cadvisor
       ansible.builtin.systemd:
         name: cadvisor

@@ -1,0 +1,4 @@
+profile: moderate
+exclude_paths:
+    - roles-galaxy/
+    - roles/docker_lgtm/files/prometheus/rules

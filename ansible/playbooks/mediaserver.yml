@@ -1,6 +1,5 @@
 - name: Manage Media Server
   hosts: mediaserver
-  become: yes
 
   roles:
     - geerlingguy.docker

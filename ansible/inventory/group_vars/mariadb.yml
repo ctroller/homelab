@@ -7,4 +7,3 @@ mariadb_users:
     password: "{{ mysqld_exporter_password }}"
     priv: "*.*:PROCESS,REPLICATION CLIENT"
     state: present
-
