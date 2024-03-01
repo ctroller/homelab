@@ -3581,7 +3581,8 @@
     "refresh": "",
     "schemaVersion": 39,
     "tags": [
-      "minio"
+      "minio",
+      "prometheus"
     ],
     "templating": {
       "list": [

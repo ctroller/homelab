@@ -3866,7 +3866,12 @@
     ],
     "refresh": "10s",
     "schemaVersion": 39,
-    "tags": [],
+    "tags": [
+      "prometheus",
+      "database",
+      "mysql",
+      "mariadb"
+    ],
     "templating": {
       "list": [
         {

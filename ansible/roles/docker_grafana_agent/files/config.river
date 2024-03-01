@@ -1,9 +1,26 @@
-local.file_match "hostlogs" {
-    path_targets = [{"__path__" = "/var/host_logs/*.log"}, {"__path__" = "/var/host_logs/syslog"}]
+local.file_match "host_logs" {
+    path_targets = [{"__path__" = "/ext_logs/*.log"}]
+}
+
+loki.relabel "journal" {
+  forward_to = []
+
+  rule {
+    source_labels = ["__journal__systemd_unit"]
+    target_label  = "unit"
+  }
+}
+
+
+loki.source.journal "host_journal" {
+    path = "/ext_logs"
+    forward_to = [loki.write.default.receiver]
+    relabel_rules = loki.relabel.journal.rules
+    labels = {env = "homelab", source = "journal"}
 }
 
 loki.source.file "local_files" {
-    targets    = local.file_match.hostlogs.targets
+    targets    = local.file_match.host_logs.targets
     forward_to = [loki.write.default.receiver]
 }
 

@@ -2999,8 +2999,8 @@
     "refresh": "",
     "schemaVersion": 39,
     "tags": [
-      "jenkins-x",
-      "loki"
+      "loki",
+      "prometheus"
     ],
     "templating": {
       "list": []
