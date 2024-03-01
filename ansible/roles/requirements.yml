@@ -1,6 +1,7 @@
 roles:
   - src: geerlingguy.docker
   - src: geerlingguy.pip
+  - src: ome.fluentd
   - src: ome.cadvisor
   - src: fauust.mariadb
 

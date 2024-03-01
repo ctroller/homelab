@@ -18,10 +18,17 @@ scrape_configs:
     static_configs:
       - targets:
         - localhost:9090
+
   - job_name: 'alertmanager'
     static_configs:
       - targets:
         - alertmanager:9093
+
+  - job_name: minio
+    metrics_path: /minio/v2/metrics/cluster
+    scheme: http
+    static_configs:
+      - targets: ['minio:9000']
 
   - job_name: mimir
     static_configs:

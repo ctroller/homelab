@@ -5,6 +5,11 @@
     - geerlingguy.pip
     - prometheus.prometheus.node_exporter
     - docker_grafana_agent
+    - docker_fluentd
+
+  vars_files:
+    - ../../.vault
+
   vars:
     pip_install_packages:
       - name: docker
@@ -16,3 +21,4 @@
       - filesystem:
           ignored-mount-points: ^/(dev|proc|sys|var/lib/docker/(containers|devicemapper|overlay2)/.+)($|/)
           ignored-fs-types: "^(sys|proc|auto|te?mp|ram|ns)fs$"
+
