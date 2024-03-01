@@ -5,7 +5,6 @@
     - geerlingguy.pip
     - prometheus.prometheus.node_exporter
     - docker_grafana_agent
-    - docker_fluentd
 
   vars_files:
     - ../../.vault

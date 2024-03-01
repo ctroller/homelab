@@ -1,0 +1,14 @@
+- name: Manage apt packages
+  hosts: all
+  tasks:
+    - name: Update & Upgrade
+      ansible.builtin.apt:
+        upgrade: true
+        update_cache: true
+        cache_valid_time: 86400 # One day
+
+    - name: Default apt packages
+      ansible.builtin.apt:
+        pkg:
+          - htop
+        state: present
