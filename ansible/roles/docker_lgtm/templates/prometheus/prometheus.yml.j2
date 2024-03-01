@@ -38,6 +38,14 @@ scrape_configs:
     static_configs:
       - targets: ["loki:3100"]
 
+  - job_name: 'speedtest'
+    metrics_path: /probe
+    scrape_interval: 300s
+    scrape_timeout: 60s
+    static_configs:
+    - targets:
+      - pve.trox.lan:9516
+
   - job_name: cadvisor
     static_configs:
       - targets:
