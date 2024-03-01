@@ -1,61 +1,14 @@
-
-local.file_match "host_logs" {
-  path_targets = [{
-    __address__ = "localhost",
-    __path__    = "/var/host_log/**",
-    __path_exclude__    = "/var/host_log/file.activity.log",
-  }]
+local.file_match "hostlogs" {
+    path_targets = [{"__path__" = "/var/host_logs/*.log"}, {"__path__" = "/var/host_logs/syslog"}]
 }
 
-loki.source.file "files" {
-    targets    = local.file_match.host_logs.targets
-    forward_to = [loki.write.default.receiver]
-}
-
-
-discovery.docker "flog_scrape" {
-    host             = "unix:///var/run/docker.sock"
-    refresh_interval = "5s"
-
-    filter {
-        name   = "label"
-        values = ["logging=promtail"]
-    }
-}
-
-discovery.relabel "flog_scrape" {
-    targets = discovery.docker.flog_scrape.targets
-
-    rule {
-        source_labels = ["__meta_docker_container_name"]
-        regex         = "/(.*)"
-        target_label  = "container"
-    }
-
-    rule {
-        source_labels = ["__meta_docker_container_log_stream"]
-        target_label  = "logstream"
-    }
-
-    rule {
-        source_labels = ["__meta_docker_container_label_logging_jobname"]
-        target_label  = "job"
-    }
-}
-
-
-local.file_match "flog_scrape" {
-    path_targets = discovery.relabel.flog_scrape.output
-}
-
-loki.source.file "flog_scrape" {
-    targets    = local.file_match.flog_scrape.targets
+loki.source.file "local_files" {
+    targets    = local.file_match.hostlogs.targets
     forward_to = [loki.write.default.receiver]
 }
 
 loki.write "default" {
     endpoint {
         url = "https://loki.home.trox.dev/loki/api/v1/push"
-        tenant_id = "test"
     }
 }
