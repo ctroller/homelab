@@ -1,0 +1,139 @@
+version: '3.8'
+
+services:
+  plex:
+    image: linuxserver/plex
+    container_name: plex
+    environment:
+      - VERSION=docker
+    volumes:
+      - "./plex:/config"
+      - "/mnt/share/media/series:/tv"
+      - "/mnt/share/media/movies:/movies"
+    env_file: .env
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    volumes:
+      - "./sonarr:/config"
+      - "/mnt/share:/data"
+    ports:
+      - "8989:8989"
+    env_file: .env
+    restart: unless-stopped
+
+  sonarr-anime:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    volumes:
+      - "./sonarr:/config"
+      - "/mnt/share:/data"
+    ports:
+      - "8990:8989"
+    env_file: .env
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    volumes:
+      - "./radarr:/config"
+      - "/mnt/share:/data"
+    ports:
+      - "7878:7878"
+    env_file: .env
+    restart: unless-stopped
+
+  tautulli:
+    image: linuxserver/tautulli
+    container_name: tautulli
+    volumes:
+      - "./tautulli:/config"
+    ports:
+      - "8181:8181"
+    env_file: .env
+    restart: unless-stopped
+
+  bazarr:
+    image: linuxserver/bazarr
+    container_name: bazarr
+    env_file: .env
+    restart: unless-stopped
+
+  prowlarr:
+    image: linuxserver/prowlarr
+    container_name: prowlarr
+    volumes:
+      - "./prowlarr:/config"
+    ports:
+      - "9696:9696"
+    env_file: .env
+    restart: unless-stopped
+
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    volumes:
+      - "./qbittorrent:/config"
+      - "/mnt/share/torrents:/downloads"
+    environment:
+      - WEBUI_PORT=8081
+    network_mode: "service:gluetun"
+    env_file: .env
+    restart: unless-stopped
+
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+       - ./gluetun:/gluetun
+    ports:
+      - "8889:8888/tcp" # HTTP proxy
+      - "8388:8388/tcp" # Shadowsocks
+      - "8388:8388/udp" # Shadowsocks
+      # sabnzbd
+      - "8082:8080"
+      # qbittorrent
+      - "8081:8081"
+      - "6881:6881"
+      - "6881:6881/udp"
+    env_file: .env
+    restart: unless-stopped
+
+  sabnzbd:
+    image: linuxserver/sabnzbd
+    container_name: sabnzbd
+    volumes:
+      - "./sabnzbd:/config"
+      - "/mnt/share/usenet:/downloads"
+    network_mode: "service:gluetun"
+    env_file: .env
+    restart: unless-stopped
+
+  overseerr:
+    image: linuxserver/overseerr
+    container_name: overseerr
+    ports:
+      - "5055:5055"
+    volumes:
+      - "./overseerr:/config"
+    env_file: .env
+    restart: unless-stopped
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+    env_file: .env
+    ports:
+      - "8191:8191"
+    restart: unless-stopped

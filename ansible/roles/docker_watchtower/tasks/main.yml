@@ -4,5 +4,8 @@
     image: "ghcr.io/containrrr/watchtower"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+    env:
+      WATCHTOWER_SCHEDULE: 0 0 4 * * *
+      WATCHTOWER_CLEANUP: "true"
     restart_policy: unless-stopped
     state: started
