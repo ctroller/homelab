@@ -15,6 +15,7 @@ services:
     env_file: .env
     restart: unless-stopped
     network_mode: host
+    privileged: true
 
   sonarr:
     image: linuxserver/sonarr
@@ -86,12 +87,18 @@ services:
     container_name: qbittorrent
     volumes:
       - "./qbittorrent:/config"
+      - "./gluetun:/gluetun"
       - "${DATA_DIR}/torrents:/downloads"
     environment:
       - WEBUI_PORT=8081
     network_mode: "service:gluetun"
     env_file: .env
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/config/qbit-healthcheck.sh"]
+      interval: 20s
+      timeout: 10s
+      start_period: 30s
 
   gluetun:
     image: qmcgaw/gluetun
@@ -110,8 +117,8 @@ services:
       - "8082:8080"
       # qbittorrent
       - "8081:8081"
-      - "6881:6881"
-      - "6881:6881/udp"
+      - "51934:51934"
+      - "51934:51934/udp"
     env_file: .env
     restart: unless-stopped
 
@@ -144,6 +151,7 @@ services:
     ports:
       - "8191:8191"
     restart: unless-stopped
+
 
   recyclarr:
     image: ghcr.io/recyclarr/recyclarr
