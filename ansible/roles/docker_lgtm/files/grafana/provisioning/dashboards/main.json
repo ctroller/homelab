@@ -18,6 +18,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
+    "id": 31,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -33,31 +34,6 @@
         "panels": [],
         "title": "Vitals",
         "type": "row"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
-        },
-        "gridPos": {
-          "h": 1,
-          "w": 24,
-          "x": 0,
-          "y": 1
-        },
-        "id": 16,
-        "options": {
-          "code": {
-            "language": "plaintext",
-            "showLineNumbers": false,
-            "showMiniMap": false
-          },
-          "content": "",
-          "mode": "html"
-        },
-        "pluginVersion": "10.3.3",
-        "title": "Hypervisor",
-        "type": "text"
       },
       {
         "datasource": {
@@ -214,7 +190,7 @@
           "h": 12,
           "w": 5,
           "x": 0,
-          "y": 2
+          "y": 1
         },
         "id": 3,
         "options": {
@@ -445,7 +421,7 @@
           "h": 6,
           "w": 3,
           "x": 5,
-          "y": 2
+          "y": 1
         },
         "id": 5,
         "options": {
@@ -532,7 +508,7 @@
           "h": 5,
           "w": 2,
           "x": 8,
-          "y": 2
+          "y": 1
         },
         "id": 8,
         "links": [],
@@ -614,7 +590,7 @@
           "h": 5,
           "w": 2,
           "x": 10,
-          "y": 2
+          "y": 1
         },
         "hideTimeOverride": false,
         "id": 9,
@@ -681,7 +657,7 @@
           "h": 12,
           "w": 6,
           "x": 12,
-          "y": 2
+          "y": 1
         },
         "id": 13,
         "options": {
@@ -771,7 +747,7 @@
           "h": 7,
           "w": 6,
           "x": 18,
-          "y": 2
+          "y": 1
         },
         "id": 12,
         "options": {
@@ -826,6 +802,97 @@
           "type": "prometheus",
           "uid": "PBFA97CFB590B2093"
         },
+        "description": "Busy state of all CPU cores together (15 min average)",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 1,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "rgba(50, 172, 45, 0.97)",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 85
+                },
+                {
+                  "color": "rgba(245, 54, 54, 0.9)",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percent",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 2,
+          "x": 8,
+          "y": 6
+        },
+        "id": 14,
+        "links": [],
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "10.3.3",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${DS_PROMETHEUS}"
+            },
+            "editorMode": "code",
+            "exemplar": false,
+            "expr": "avg_over_time(node_load15{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) * 100 / on(instance) group_left sum by (instance)(irate(node_cpu_seconds_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]))",
+            "hide": false,
+            "instant": true,
+            "intervalFactor": 1,
+            "range": false,
+            "refId": "A",
+            "step": 240
+          }
+        ],
+        "title": "Sys Load (15m avg)",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
         "description": "Used Root FS",
         "fieldConfig": {
           "defaults": {
@@ -871,8 +938,8 @@
         "gridPos": {
           "h": 5,
           "w": 2,
-          "x": 8,
-          "y": 7
+          "x": 10,
+          "y": 6
         },
         "id": 11,
         "links": [],
@@ -947,7 +1014,7 @@
           "h": 6,
           "w": 3,
           "x": 5,
-          "y": 8
+          "y": 7
         },
         "id": 1,
         "options": {
@@ -1031,7 +1098,7 @@
           "h": 2,
           "w": 4,
           "x": 8,
-          "y": 12
+          "y": 11
         },
         "hideTimeOverride": true,
         "id": 10,
@@ -1074,36 +1141,11 @@
         "type": "stat"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
-        },
         "gridPos": {
-          "h": 1,
+          "h": 5,
           "w": 24,
           "x": 0,
-          "y": 14
-        },
-        "id": 17,
-        "options": {
-          "code": {
-            "language": "plaintext",
-            "showLineNumbers": false,
-            "showMiniMap": false
-          },
-          "content": "",
-          "mode": "html"
-        },
-        "pluginVersion": "10.3.3",
-        "title": "NAS",
-        "type": "text"
-      },
-      {
-        "gridPos": {
-          "h": 4,
-          "w": 24,
-          "x": 0,
-          "y": 15
+          "y": 13
         },
         "id": 7,
         "libraryPanel": {
@@ -1111,869 +1153,869 @@
           "uid": "afc05a2d-2255-4bfd-940d-0812218ed246"
         },
         "title": "NAS Status"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
         },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "custom": {
-              "align": "center",
-              "cellOptions": {
-                "type": "auto"
-              },
-              "filterable": false,
-              "inspect": false
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unitScale": true
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
           },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Raid Status"
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
               },
-              "properties": [
-                {
-                  "id": "thresholds",
-                  "value": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": null
-                      },
-                      {
-                        "color": "yellow",
-                        "value": 2
-                      },
-                      {
-                        "color": "dark-red",
-                        "value": 11
-                      },
-                      {
-                        "color": "#EAB839",
-                        "value": 13
-                      },
-                      {
-                        "color": "dark-red",
-                        "value": 21
-                      }
-                    ]
-                  }
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
                 },
-                {
-                  "id": "mappings",
-                  "value": [
-                    {
-                      "options": {
-                        "1": {
-                          "text": "Normal"
+                "filterable": false,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Raid Status"
+                },
+                "properties": [
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
                         },
-                        "2": {
-                          "text": "Raid Repairing"
+                        {
+                          "color": "yellow",
+                          "value": 2
                         },
-                        "3": {
-                          "text": "Raid Migrating"
+                        {
+                          "color": "dark-red",
+                          "value": 11
                         },
-                        "4": {
-                          "text": "Raid Expanding"
+                        {
+                          "color": "#EAB839",
+                          "value": 13
                         },
-                        "5": {
-                          "text": "Raid Deleting"
-                        },
-                        "6": {
-                          "text": "Raid Creating"
-                        },
-                        "7": {
-                          "text": "Raid Syncing"
-                        },
-                        "8": {
-                          "text": "Raid Parity Checking"
-                        },
-                        "9": {
-                          "text": "Raid Assembling"
-                        },
-                        "10": {
-                          "text": "Raid Canceling"
-                        },
-                        "11": {
-                          "text": "Raid Degraded"
-                        },
-                        "12": {
-                          "text": "Raid Crashed"
-                        },
-                        "13": {
-                          "text": "Raid Data Scrubbing"
-                        },
-                        "14": {
-                          "text": "Raid Deploying"
-                        },
-                        "15": {
-                          "text": "Raid UnDeploying"
-                        },
-                        "16": {
-                          "text": "Raid Mount Cache"
-                        },
-                        "17": {
-                          "text": "Raid Unmount Cache"
-                        },
-                        "18": {
-                          "text": "Raid Expanding Unfinished SHR"
-                        },
-                        "20": {
-                          "text": "Raid Migrate SHR1 To SHR2"
-                        },
-                        "21": {
-                          "text": "Raid Unknown Status"
+                        {
+                          "color": "dark-red",
+                          "value": 21
                         }
-                      },
-                      "type": "value"
+                      ]
                     }
-                  ]
-                },
-                {
-                  "id": "custom.width"
-                },
-                {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "type": "color-text"
-                  }
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Storage Size"
-              },
-              "properties": [
-                {
-                  "id": "unit",
-                  "value": "bytes"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Storage Used"
-              },
-              "properties": [
-                {
-                  "id": "unit",
-                  "value": "bytes"
-                },
-                {
-                  "id": "custom.width",
-                  "value": 208
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Storage Free"
-              },
-              "properties": [
-                {
-                  "id": "unit",
-                  "value": "bytes"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "System Name"
-              },
-              "properties": [
-                {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "mode": "gradient",
-                    "type": "color-background"
-                  }
-                },
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "rgba(40, 33, 96, 0.78)",
-                    "mode": "fixed"
-                  }
-                },
-                {
-                  "id": "custom.width",
-                  "value": 222
-                },
-                {
-                  "id": "custom.align",
-                  "value": "left"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Storage Name"
-              },
-              "properties": [
-                {
-                  "id": "custom.align"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Usage by Percentage"
-              },
-              "properties": [
-                {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "mode": "gradient",
-                    "type": "gauge"
-                  }
-                },
-                {
-                  "id": "unit",
-                  "value": "percent"
-                },
-                {
-                  "id": "custom.width",
-                  "value": 300
-                },
-                {
-                  "id": "decimals",
-                  "value": 2
-                },
-                {
-                  "id": "thresholds",
-                  "value": {
-                    "mode": "absolute",
-                    "steps": [
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
                       {
-                        "color": "green",
-                        "value": null
-                      },
-                      {
-                        "color": "yellow",
-                        "value": 80
-                      },
-                      {
-                        "color": "dark-orange",
-                        "value": 85
-                      },
-                      {
-                        "color": "dark-red",
-                        "value": 90
+                        "options": {
+                          "1": {
+                            "text": "Normal"
+                          },
+                          "2": {
+                            "text": "Raid Repairing"
+                          },
+                          "3": {
+                            "text": "Raid Migrating"
+                          },
+                          "4": {
+                            "text": "Raid Expanding"
+                          },
+                          "5": {
+                            "text": "Raid Deleting"
+                          },
+                          "6": {
+                            "text": "Raid Creating"
+                          },
+                          "7": {
+                            "text": "Raid Syncing"
+                          },
+                          "8": {
+                            "text": "Raid Parity Checking"
+                          },
+                          "9": {
+                            "text": "Raid Assembling"
+                          },
+                          "10": {
+                            "text": "Raid Canceling"
+                          },
+                          "11": {
+                            "text": "Raid Degraded"
+                          },
+                          "12": {
+                            "text": "Raid Crashed"
+                          },
+                          "13": {
+                            "text": "Raid Data Scrubbing"
+                          },
+                          "14": {
+                            "text": "Raid Deploying"
+                          },
+                          "15": {
+                            "text": "Raid UnDeploying"
+                          },
+                          "16": {
+                            "text": "Raid Mount Cache"
+                          },
+                          "17": {
+                            "text": "Raid Unmount Cache"
+                          },
+                          "18": {
+                            "text": "Raid Expanding Unfinished SHR"
+                          },
+                          "20": {
+                            "text": "Raid Migrate SHR1 To SHR2"
+                          },
+                          "21": {
+                            "text": "Raid Unknown Status"
+                          }
+                        },
+                        "type": "value"
                       }
                     ]
+                  },
+                  {
+                    "id": "custom.width"
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "color-text"
+                    }
                   }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Storage Size"
                 },
-                {
-                  "id": "max",
-                  "value": 101
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "bytes"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Storage Used"
                 },
-                {
-                  "id": "min",
-                  "value": 0
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 0,
-          "y": 19
-        },
-        "id": 14,
-        "options": {
-          "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "bytes"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 208
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Storage Free"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "bytes"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "System Name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "gradient",
+                      "type": "color-background"
+                    }
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "rgba(40, 33, 96, 0.78)",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 222
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "left"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Storage Name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.align"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Usage by Percentage"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "gradient",
+                      "type": "gauge"
+                    }
+                  },
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 300
+                  },
+                  {
+                    "id": "decimals",
+                    "value": 2
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "yellow",
+                          "value": 80
+                        },
+                        {
+                          "color": "dark-orange",
+                          "value": 85
+                        },
+                        {
+                          "color": "dark-red",
+                          "value": 90
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "max",
+                    "value": 101
+                  },
+                  {
+                    "id": "min",
+                    "value": 0
+                  }
+                ]
+              }
+            ]
           },
-          "showHeader": true,
-          "sortBy": [
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 19
+          },
+          "id": 14,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "System Name"
+              }
+            ]
+          },
+          "pluginVersion": "10.3.3",
+          "targets": [
             {
-              "desc": false,
-              "displayName": "System Name"
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "raidTotalSize{job='snmp'}",
+              "format": "table",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Total Size",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "(raidTotalSize{job='snmp'}-raidFreeSize{job='snmp'})",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Used",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "raidFreeSize{job='snmp'}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Free",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "raidStatus{job='snmp'}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Free",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "((raidTotalSize{job='snmp'}-raidFreeSize{job='snmp'})/raidTotalSize{job='snmp'})*100",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "Usage by Percent",
+              "refId": "E"
             }
-          ]
+          ],
+          "title": "NAS Storage",
+          "transformations": [
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "names": [
+                    "instance",
+                    "raidName",
+                    "Value #A",
+                    "Value #B",
+                    "Value #C",
+                    "Value #D",
+                    "Value #E"
+                  ]
+                }
+              }
+            },
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "field": "instance"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "field": "raidName"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "indexByName": {
+                  "Value #A": 3,
+                  "Value #B": 4,
+                  "Value #C": 5,
+                  "Value #D": 2,
+                  "instance": 0,
+                  "raidName": 1
+                },
+                "renameByName": {
+                  "Value #A": "Storage Size",
+                  "Value #B": "Storage Used",
+                  "Value #C": "Storage Free",
+                  "Value #D": "Raid Status",
+                  "Value #E": "Usage by Percentage",
+                  "instance": "System Name",
+                  "raidName": "Storage Name"
+                }
+              }
+            }
+          ],
+          "type": "table"
         },
-        "pluginVersion": "10.3.3",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "raidTotalSize{job='snmp'}",
-            "format": "table",
-            "instant": true,
-            "interval": "",
-            "legendFormat": "Total Size",
-            "refId": "A"
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
           },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": false,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unitScale": true
             },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "(raidTotalSize{job='snmp'}-raidFreeSize{job='snmp'})",
-            "format": "table",
-            "hide": false,
-            "instant": true,
-            "interval": "",
-            "legendFormat": "Used",
-            "refId": "B"
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Temperature"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "gradient",
+                      "type": "gauge"
+                    }
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds"
+                    }
+                  },
+                  {
+                    "id": "unit",
+                    "value": "celsius"
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "#EAB839",
+                          "value": 50
+                        },
+                        {
+                          "color": "red",
+                          "value": 80
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "max",
+                    "value": 100
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 300
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "color-text"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green",
+                          "value": null
+                        },
+                        {
+                          "color": "dark-yellow",
+                          "value": 2
+                        },
+                        {
+                          "color": "dark-red",
+                          "value": 4
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "custom.align",
+                    "value": "center"
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "1": {
+                            "text": "Normal"
+                          },
+                          "2": {
+                            "text": "Initialized"
+                          },
+                          "3": {
+                            "text": "Not Initialized"
+                          },
+                          "5": {
+                            "text": "Crashed"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "color-text"
+                    }
+                  },
+                  {
+                    "id": "color"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 125
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Disk"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 125
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Type"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "System Name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 220
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "gradient",
+                      "type": "color-background"
+                    }
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "rgba(40, 33, 96, 0.78)",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
           },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "raidFreeSize{job='snmp'}",
-            "format": "table",
-            "hide": false,
-            "instant": true,
-            "interval": "",
-            "legendFormat": "Free",
-            "refId": "C"
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 19
           },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+          "id": 15,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
             },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "raidStatus{job='snmp'}",
-            "format": "table",
-            "hide": false,
-            "instant": true,
-            "interval": "",
-            "legendFormat": "Free",
-            "refId": "D"
+            "frameIndex": 5,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "System Name"
+              }
+            ]
           },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+          "pluginVersion": "10.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "diskIndex{job='snmp'}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "F"
             },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "((raidTotalSize{job='snmp'}-raidFreeSize{job='snmp'})/raidTotalSize{job='snmp'})*100",
-            "format": "table",
-            "hide": false,
-            "instant": true,
-            "interval": "",
-            "legendFormat": "Usage by Percent",
-            "refId": "E"
-          }
-        ],
-        "title": "NAS Storage",
-        "transformations": [
-          {
-            "id": "filterFieldsByName",
-            "options": {
-              "include": {
-                "names": [
-                  "instance",
-                  "raidName",
-                  "Value #A",
-                  "Value #B",
-                  "Value #C",
-                  "Value #D",
-                  "Value #E"
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "diskID{job='snmp'}",
+              "format": "table",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "diskType{job='snmp'}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "diskStatus{job='snmp'}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "diskModel{job='snmp'}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "diskTemperature{job='snmp'}",
+              "format": "table",
+              "hide": false,
+              "instant": true,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "E"
+            }
+          ],
+          "title": "NAS Drives",
+          "transformations": [
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "names": [
+                    "diskID",
+                    "instance",
+                    "diskType",
+                    "Value #C",
+                    "diskModel",
+                    "Value #E"
+                  ]
+                }
+              }
+            },
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "indexByName": {
+                  "Value #C": 2,
+                  "Value #E": 5,
+                  "diskID": 1,
+                  "diskModel": 4,
+                  "diskType": 3,
+                  "instance": 0
+                },
+                "renameByName": {
+                  "Value #C": "Status",
+                  "Value #E": "Temperature",
+                  "diskID": "Disk",
+                  "diskModel": "Model",
+                  "diskType": "Type",
+                  "instance": "System Name"
+                }
+              }
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "field": "System Name"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "field": "Disk"
+                  }
                 ]
               }
             }
-          },
-          {
-            "id": "merge",
-            "options": {}
-          },
-          {
-            "id": "sortBy",
-            "options": {
-              "fields": {},
-              "sort": [
-                {
-                  "field": "instance"
-                }
-              ]
-            }
-          },
-          {
-            "id": "sortBy",
-            "options": {
-              "fields": {},
-              "sort": [
-                {
-                  "field": "raidName"
-                }
-              ]
-            }
-          },
-          {
-            "id": "organize",
-            "options": {
-              "excludeByName": {},
-              "indexByName": {
-                "Value #A": 3,
-                "Value #B": 4,
-                "Value #C": 5,
-                "Value #D": 2,
-                "instance": 0,
-                "raidName": 1
-              },
-              "renameByName": {
-                "Value #A": "Storage Size",
-                "Value #B": "Storage Used",
-                "Value #C": "Storage Free",
-                "Value #D": "Raid Status",
-                "Value #E": "Usage by Percentage",
-                "instance": "System Name",
-                "raidName": "Storage Name"
-              }
-            }
-          }
-        ],
-        "type": "table"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "custom": {
-              "align": "auto",
-              "cellOptions": {
-                "type": "auto"
-              },
-              "filterable": false,
-              "inspect": false
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unitScale": true
-          },
-          "overrides": [
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Temperature"
-              },
-              "properties": [
-                {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "mode": "gradient",
-                    "type": "gauge"
-                  }
-                },
-                {
-                  "id": "color",
-                  "value": {
-                    "mode": "thresholds"
-                  }
-                },
-                {
-                  "id": "unit",
-                  "value": "celsius"
-                },
-                {
-                  "id": "thresholds",
-                  "value": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": null
-                      },
-                      {
-                        "color": "#EAB839",
-                        "value": 50
-                      },
-                      {
-                        "color": "red",
-                        "value": 80
-                      }
-                    ]
-                  }
-                },
-                {
-                  "id": "max",
-                  "value": 100
-                },
-                {
-                  "id": "custom.width",
-                  "value": 300
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Status"
-              },
-              "properties": [
-                {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "type": "color-text"
-                  }
-                },
-                {
-                  "id": "thresholds",
-                  "value": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "color": "green",
-                        "value": null
-                      },
-                      {
-                        "color": "dark-yellow",
-                        "value": 2
-                      },
-                      {
-                        "color": "dark-red",
-                        "value": 4
-                      }
-                    ]
-                  }
-                },
-                {
-                  "id": "custom.align",
-                  "value": "center"
-                },
-                {
-                  "id": "mappings",
-                  "value": [
-                    {
-                      "options": {
-                        "1": {
-                          "text": "Normal"
-                        },
-                        "2": {
-                          "text": "Initialized"
-                        },
-                        "3": {
-                          "text": "Not Initialized"
-                        },
-                        "5": {
-                          "text": "Crashed"
-                        }
-                      },
-                      "type": "value"
-                    }
-                  ]
-                },
-                {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "type": "color-text"
-                  }
-                },
-                {
-                  "id": "color"
-                },
-                {
-                  "id": "custom.width",
-                  "value": 125
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Disk"
-              },
-              "properties": [
-                {
-                  "id": "custom.width",
-                  "value": 125
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "Type"
-              },
-              "properties": [
-                {
-                  "id": "custom.width"
-                }
-              ]
-            },
-            {
-              "matcher": {
-                "id": "byName",
-                "options": "System Name"
-              },
-              "properties": [
-                {
-                  "id": "custom.width",
-                  "value": 220
-                },
-                {
-                  "id": "custom.cellOptions",
-                  "value": {
-                    "mode": "gradient",
-                    "type": "color-background"
-                  }
-                },
-                {
-                  "id": "color",
-                  "value": {
-                    "fixedColor": "rgba(40, 33, 96, 0.78)",
-                    "mode": "fixed"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 12,
-          "y": 19
-        },
-        "id": 15,
-        "options": {
-          "cellHeight": "sm",
-          "footer": {
-            "countRows": false,
-            "fields": "",
-            "reducer": [
-              "sum"
-            ],
-            "show": false
-          },
-          "frameIndex": 5,
-          "showHeader": true,
-          "sortBy": [
-            {
-              "desc": false,
-              "displayName": "System Name"
-            }
-          ]
-        },
-        "pluginVersion": "10.3.3",
-        "targets": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "diskIndex{job='snmp'}",
-            "format": "table",
-            "hide": false,
-            "instant": true,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "F"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "diskID{job='snmp'}",
-            "format": "table",
-            "instant": true,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "A"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "diskType{job='snmp'}",
-            "format": "table",
-            "hide": false,
-            "instant": true,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "B"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "diskStatus{job='snmp'}",
-            "format": "table",
-            "hide": false,
-            "instant": true,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "C"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "diskModel{job='snmp'}",
-            "format": "table",
-            "hide": false,
-            "instant": true,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "D"
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "editorMode": "code",
-            "exemplar": true,
-            "expr": "diskTemperature{job='snmp'}",
-            "format": "table",
-            "hide": false,
-            "instant": true,
-            "interval": "",
-            "legendFormat": "",
-            "refId": "E"
-          }
-        ],
-        "title": "NAS Drives",
-        "transformations": [
-          {
-            "id": "filterFieldsByName",
-            "options": {
-              "include": {
-                "names": [
-                  "diskID",
-                  "instance",
-                  "diskType",
-                  "Value #C",
-                  "diskModel",
-                  "Value #E"
-                ]
-              }
-            }
-          },
-          {
-            "id": "merge",
-            "options": {}
-          },
-          {
-            "id": "organize",
-            "options": {
-              "excludeByName": {},
-              "indexByName": {
-                "Value #C": 2,
-                "Value #E": 5,
-                "diskID": 1,
-                "diskModel": 4,
-                "diskType": 3,
-                "instance": 0
-              },
-              "renameByName": {
-                "Value #C": "Status",
-                "Value #E": "Temperature",
-                "diskID": "Disk",
-                "diskModel": "Model",
-                "diskType": "Type",
-                "instance": "System Name"
-              }
-            }
-          },
-          {
-            "id": "sortBy",
-            "options": {
-              "fields": {},
-              "sort": [
-                {
-                  "field": "System Name"
-                }
-              ]
-            }
-          },
-          {
-            "id": "sortBy",
-            "options": {
-              "fields": {},
-              "sort": [
-                {
-                  "field": "Disk"
-                }
-              ]
-            }
-          }
-        ],
-        "type": "table"
-      }
+          ],
+          "type": "table"
+        }
     ],
     "refresh": "30s",
     "schemaVersion": 39,
