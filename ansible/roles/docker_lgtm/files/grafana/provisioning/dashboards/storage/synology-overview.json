@@ -1207,7 +1207,7 @@
               "properties": [
                 {
                   "id": "unit",
-                  "value": "fahrenheit"
+                  "value": "celsius"
                 },
                 {
                   "id": "custom.cellOptions",
@@ -1227,18 +1227,18 @@
                       },
                       {
                         "color": "yellow",
-                        "value": 100
+                        "value": 50
                       },
                       {
                         "color": "dark-red",
-                        "value": 135
+                        "value": 80
                       }
                     ]
                   }
                 },
                 {
                   "id": "max",
-                  "value": 141
+                  "value": 100
                 },
                 {
                   "id": "custom.width"
@@ -1515,8 +1515,9 @@
               "type": "prometheus",
               "uid": "PBFA97CFB590B2093"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "(temperature{job=~'$JobName',instance=~'$Device'}*9/5)+32",
+            "expr": "temperature{job=~'$JobName',instance=~'$Device'}",
             "format": "table",
             "hide": false,
             "instant": true,
@@ -1661,6 +1662,7 @@
               "mode": "fixed"
             },
             "custom": {
+              "align": "auto",
               "cellOptions": {
                 "mode": "gradient",
                 "type": "color-background"
@@ -2397,6 +2399,7 @@
               "mode": "thresholds"
             },
             "custom": {
+              "align": "auto",
               "cellOptions": {
                 "type": "auto"
               },
@@ -2441,7 +2444,7 @@
                 },
                 {
                   "id": "unit",
-                  "value": "fahrenheit"
+                  "value": "celsius"
                 },
                 {
                   "id": "thresholds",
@@ -2454,18 +2457,18 @@
                       },
                       {
                         "color": "#EAB839",
-                        "value": 100
+                        "value": 50
                       },
                       {
                         "color": "red",
-                        "value": 138
+                        "value": 80
                       }
                     ]
                   }
                 },
                 {
                   "id": "max",
-                  "value": 140
+                  "value": 100
                 },
                 {
                   "id": "custom.width",
@@ -2699,8 +2702,9 @@
               "type": "prometheus",
               "uid": "PBFA97CFB590B2093"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "(diskTemperature{job=~'$JobName',instance=~'$Device',diskID=~'$DiskName'}*9/5)+32 or (diskTemperature{job=~'$JobName',instance=~'$Device',diskID=~'$DiskNameSSD'}*9/5)+32",
+            "expr": "diskTemperature{job=~'$JobName',instance=~'$Device',diskID=~'$DiskName'} or diskTemperature{job=~'$JobName',instance=~'$Device',diskID=~'$DiskNameSSD'}",
             "format": "table",
             "hide": false,
             "instant": true,
@@ -2818,21 +2822,24 @@
               "cellOptions": {
                 "type": "auto"
               },
-              "filterable": false
+              "filterable": false,
+              "inspect": false
             },
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
                   "value": 80
                 }
               ]
-            }
+            },
+            "unitScale": true
           },
           "overrides": [
             {
@@ -2902,7 +2909,8 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green"
+                        "color": "green",
+                        "value": null
                       },
                       {
                         "color": "yellow",
@@ -2986,7 +2994,8 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green"
+                        "color": "green",
+                        "value": null
                       },
                       {
                         "color": "dark-red",
@@ -3035,6 +3044,15 @@
         },
         "id": 12,
         "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
           "showHeader": true,
           "sortBy": [
             {
@@ -3043,7 +3061,7 @@
             }
           ]
         },
-        "pluginVersion": "8.0.3",
+        "pluginVersion": "10.3.3",
         "targets": [
           {
             "datasource": {
@@ -3217,21 +3235,24 @@
               "cellOptions": {
                 "type": "auto"
               },
-              "filterable": false
+              "filterable": false,
+              "inspect": false
             },
             "mappings": [],
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
                   "value": 80
                 }
               ]
-            }
+            },
+            "unitScale": true
           },
           "overrides": [
             {
@@ -3301,7 +3322,8 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green"
+                        "color": "green",
+                        "value": null
                       },
                       {
                         "color": "dark-red",
@@ -3385,7 +3407,8 @@
                     "mode": "absolute",
                     "steps": [
                       {
-                        "color": "green"
+                        "color": "green",
+                        "value": null
                       },
                       {
                         "color": "dark-red",
@@ -3446,6 +3469,15 @@
         },
         "id": 15,
         "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
           "showHeader": true,
           "sortBy": [
             {
@@ -3454,7 +3486,7 @@
             }
           ]
         },
-        "pluginVersion": "8.0.3",
+        "pluginVersion": "10.3.3",
         "targets": [
           {
             "datasource": {
@@ -3850,6 +3882,6 @@
     "timezone": "",
     "title": "Synology NAS Overview",
     "uid": "ZDXCZYrMk",
-    "version": 2,
+    "version": 5,
     "weekStart": ""
   }
