@@ -6,6 +6,17 @@
     - prometheus.prometheus.cadvisor
     - docker_watchtower
 
+  pre_tasks:
+    - name: Create docker group
+      ansible.builtin.group:
+        name: docker
+        gid: 1000
+    - name: Create docker user
+      ansible.builtin.user:
+        name: docker
+        group: docker
+        uid: 1000
+
   tasks:
     - name: Update cadvisor service template
       ansible.builtin.lineinfile:
