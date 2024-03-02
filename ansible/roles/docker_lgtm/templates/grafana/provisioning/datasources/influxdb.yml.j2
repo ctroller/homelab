@@ -11,3 +11,13 @@ datasources:
     version: Flux
   secureJsonData:
     token: {{ influxdb_init_api_token }}
+- name: InfluxDB-iql-proxmox
+  type: influxdb
+  access: proxy
+  url: http://influxdb:8086
+  database: proxmox
+  jsonData:
+    httpMode: GET
+    httpHeaderName1: 'Authorization'
+  secureJsonData:
+    httpHeaderValue1: 'Token {{ influxdb_init_api_token }}'
