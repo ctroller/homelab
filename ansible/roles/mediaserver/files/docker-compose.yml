@@ -8,8 +8,8 @@ services:
       - VERSION=docker
     volumes:
       - "./plex:/config"
-      - "/mnt/share/media/series:/tv"
-      - "/mnt/share/media/movies:/movies"
+      - "${DATA_DIR}/media/series:/tv"
+      - "${DATA_DIR}/media/movies:/movies"
     env_file: .env
     restart: unless-stopped
     network_mode: host
@@ -20,7 +20,7 @@ services:
     container_name: sonarr
     volumes:
       - "./sonarr:/config"
-      - "/mnt/share:/data"
+      - "${DATA_DIR}:/data"
     ports:
       - "8989:8989"
     env_file: .env
@@ -28,10 +28,10 @@ services:
 
   sonarr-anime:
     image: linuxserver/sonarr
-    container_name: sonarr
+    container_name: sonarr-anime
     volumes:
-      - "./sonarr:/config"
-      - "/mnt/share:/data"
+      - "./sonarr-anime:/config"
+      - "${DATA_DIR}:/data"
     ports:
       - "8990:8989"
     env_file: .env
@@ -42,7 +42,7 @@ services:
     container_name: radarr
     volumes:
       - "./radarr:/config"
-      - "/mnt/share:/data"
+      - "${DATA_DIR}:/data"
     ports:
       - "7878:7878"
     env_file: .env
@@ -61,6 +61,12 @@ services:
   bazarr:
     image: linuxserver/bazarr
     container_name: bazarr
+    volumes:
+      - "./bazarr:/config"
+      - "${DATA_DIR}/media/series:/tv"
+      - "${DATA_DIR}/media/movies:/movies"
+    ports:
+      - "6767:6767"
     env_file: .env
     restart: unless-stopped
 
@@ -79,7 +85,7 @@ services:
     container_name: qbittorrent
     volumes:
       - "./qbittorrent:/config"
-      - "/mnt/share/torrents:/downloads"
+      - "${DATA_DIR}/torrents:/downloads"
     environment:
       - WEBUI_PORT=8081
     network_mode: "service:gluetun"
@@ -113,7 +119,7 @@ services:
     container_name: sabnzbd
     volumes:
       - "./sabnzbd:/config"
-      - "/mnt/share/usenet:/downloads"
+      - "${DATA_DIR}/usenet:/downloads"
     network_mode: "service:gluetun"
     env_file: .env
     restart: unless-stopped
@@ -136,4 +142,12 @@ services:
     env_file: .env
     ports:
       - "8191:8191"
+    restart: unless-stopped
+
+  recyclarr:
+    image: ghcr.io/recyclarr/recyclarr
+    container_name: recyclarr
+    volumes:
+      - ./recyclarr:/config
+    env_file: .env
     restart: unless-stopped
