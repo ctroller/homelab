@@ -2531,7 +2531,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 5,
+        "w": 3,
         "x": 0,
         "y": 32
       },
@@ -2542,7 +2542,7 @@
         "minVizHeight": 16,
         "minVizWidth": 8,
         "namePlacement": "auto",
-        "orientation": "horizontal",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -2631,6 +2631,6 @@
   "timezone": "",
   "title": "Homelab Vitals",
   "uid": "e3b40573-041b-4481-a46e-aaf42da7258a",
-  "version": 16,
+  "version": 17,
   "weekStart": ""
 }

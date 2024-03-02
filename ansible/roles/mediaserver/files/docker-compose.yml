@@ -10,6 +10,7 @@ services:
       - "./plex:/config"
       - "${DATA_DIR}/media/series:/tv"
       - "${DATA_DIR}/media/movies:/movies"
+      - "${DATA_DIR}/media/anime:/anime"
     env_file: .env
     restart: unless-stopped
     network_mode: host
