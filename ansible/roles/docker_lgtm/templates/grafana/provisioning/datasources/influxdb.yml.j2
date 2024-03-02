@@ -21,3 +21,24 @@ datasources:
     httpHeaderName1: 'Authorization'
   secureJsonData:
     httpHeaderValue1: 'Token {{ influxdb_init_api_token }}'
+- name: InfluxDB-iql-homeassistant
+  type: influxdb
+  access: proxy
+  url: http://influxdb:8086
+  database: home_assistant
+  jsonData:
+    httpMode: GET
+    httpHeaderName1: 'Authorization'
+  secureJsonData:
+    httpHeaderValue1: 'Token {{ influxdb_init_api_token }}'
+- name: InfluxDB-flux-homeassistant
+  type: influxdb
+  access: proxy
+  url: http://influxdb:8086
+  jsonData:
+    httpMode: POST
+    organization: {{ influxdb_init_org }}
+    bucket: home_assistant
+    version: Flux
+  secureJsonData:
+    token: {{ influxdb_init_api_token }}
