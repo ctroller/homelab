@@ -204,7 +204,7 @@
                 },
                 {
                   "id": "unit",
-                  "value": "fahrenheit"
+                  "value": "celsius"
                 },
                 {
                   "id": "custom.cellOptions",
@@ -215,7 +215,7 @@
                 },
                 {
                   "id": "max",
-                  "value": 140
+                  "value": 60
                 },
                 {
                   "id": "color",
@@ -233,12 +233,12 @@
                         "value": null
                       },
                       {
-                        "color": "yellow",
-                        "value": 100
+                        "color": "dark-red",
+                        "value": 40
                       },
                       {
-                        "color": "dark-red",
-                        "value": 135
+                        "color": "yellow",
+                        "value": 60
                       }
                     ]
                   }
@@ -396,6 +396,7 @@
               "type": "prometheus",
               "uid": "PBFA97CFB590B2093"
             },
+            "editorMode": "code",
             "exemplar": true,
             "expr": "sysUpTime{job=~'$JobName',instance=~'$Device'}/100",
             "format": "table",
@@ -422,8 +423,9 @@
               "type": "prometheus",
               "uid": "PBFA97CFB590B2093"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "(temperature{job=~'$JobName',instance=~'$Device'}*9/5)+32",
+            "expr": "temperature{job=~'$JobName',instance=~'$Device'}",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -2600,6 +2602,7 @@
               "type": "prometheus",
               "uid": "PBFA97CFB590B2093"
             },
+            "editorMode": "code",
             "exemplar": true,
             "expr": "hrSystemProcesses{job=~'$JobName',instance=~'$Device'}",
             "format": "time_series",
@@ -3193,11 +3196,11 @@
                 },
                 {
                   "color": "dark-yellow",
-                  "value": 100
+                  "value": 40
                 },
                 {
                   "color": "dark-red",
-                  "value": 138
+                  "value": 58
                 }
               ]
             },
@@ -3245,11 +3248,11 @@
                 },
                 {
                   "id": "max",
-                  "value": 140
+                  "value": 60
                 },
                 {
                   "id": "unit",
-                  "value": "fahrenheit"
+                  "value": "celsius"
                 }
               ]
             },
@@ -3380,8 +3383,9 @@
               "type": "prometheus",
               "uid": "PBFA97CFB590B2093"
             },
+            "editorMode": "code",
             "exemplar": true,
-            "expr": "(diskTemperature{job=~'$JobName',instance=~'$Device'}*9/5)+32",
+            "expr": "diskTemperature{job=~'$JobName',instance=~'$Device'}",
             "format": "table",
             "instant": true,
             "interval": "",
@@ -4017,8 +4021,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "dark-blue",
-                  "value": null
+                  "color": "dark-blue"
                 }
               ]
             },
@@ -4252,8 +4255,7 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "dark-green",
-                  "value": null
+                  "color": "dark-green"
                 },
                 {
                   "color": "light-yellow",
@@ -4330,7 +4332,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 69
+          "y": 105
         },
         "id": 28,
         "panels": [
@@ -4737,7 +4739,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 72
+          "y": 108
         },
         "id": 876,
         "panels": [
@@ -5426,7 +5428,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 73
+          "y": 109
         },
         "id": 654,
         "panels": [
@@ -5760,7 +5762,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 74
+          "y": 115
         },
         "id": 17,
         "panels": [
@@ -6556,7 +6558,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 77
+          "y": 118
         },
         "id": 39,
         "panels": [
@@ -6809,7 +6811,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 78
+          "y": 119
         },
         "id": 814,
         "panels": [
@@ -7304,9 +7306,9 @@
       "list": [
         {
           "current": {
-            "selected": true,
-            "text": "4",
-            "value": "4"
+            "selected": false,
+            "text": "1",
+            "value": "1"
           },
           "description": "Total Number of NAS Systems manually entered.",
           "hide": 2,
@@ -7314,11 +7316,11 @@
           "options": [
             {
               "selected": true,
-              "text": "4",
-              "value": "4"
+              "text": "1",
+              "value": "1"
             }
           ],
-          "query": "4",
+          "query": "1",
           "skipUrlSync": false,
           "type": "textbox"
         },
@@ -7506,9 +7508,13 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -7536,9 +7542,13 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -7566,9 +7576,13 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -7594,9 +7608,13 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -7622,9 +7640,13 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -7650,9 +7672,13 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -7679,9 +7705,13 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -7707,9 +7737,13 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -7736,9 +7770,13 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -7764,9 +7802,13 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
@@ -7825,6 +7867,6 @@
     "timezone": "browser",
     "title": "Synology NAS Details",
     "uid": "i55CRAlMk",
-    "version": 10,
+    "version": 1,
     "weekStart": ""
   }

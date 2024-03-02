@@ -20,7 +20,6 @@
     "fiscalYearStartMonth": 0,
     "gnetId": 14364,
     "graphTooltip": 0,
-    "id": 34,
     "links": [
       {
         "asDropdown": true,
@@ -3730,7 +3729,7 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "definition": "label_values(ifName{job=~'$JobName',instance=~'$Device'},ifName)",
+          "definition": "label_values(ifType_info{job=~\"$JobName\", instance=~\"$Device\"},ifName)",
           "description": "Physical Network Interfaces",
           "hide": 0,
           "includeAll": true,
@@ -3739,8 +3738,9 @@
           "name": "InterfacePhysical",
           "options": [],
           "query": {
-            "query": "label_values(ifName{job=~'$JobName',instance=~'$Device'},ifName)",
-            "refId": "StandardVariableQuery"
+            "qryType": 1,
+            "query": "label_values(ifType_info{job=~\"$JobName\", instance=~\"$Device\"},ifName)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
           "regex": "^eth.*",
@@ -3882,6 +3882,6 @@
     "timezone": "",
     "title": "Synology NAS Overview",
     "uid": "ZDXCZYrMk",
-    "version": 5,
+    "version": 6,
     "weekStart": ""
   }

@@ -45,7 +45,7 @@ scrape_configs:
     metrics_path: /snmp
     params:
       auth: [public_v3]
-      module: [if_mib,synology]
+      module: [if_mib,hrSystem,hrStorage,synology]
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
