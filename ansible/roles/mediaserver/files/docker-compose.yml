@@ -11,6 +11,7 @@ services:
       - "${DATA_DIR}/media/series:/tv"
       - "${DATA_DIR}/media/movies:/movies"
       - "${DATA_DIR}/media/anime:/anime"
+      - "/dev/shm:/transcode"
     env_file: .env
     restart: unless-stopped
     network_mode: host
