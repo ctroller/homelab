@@ -140,7 +140,7 @@ groups:
         description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: HostCpuIsUnderutilized
-      expr: '100 * avg(1 - rate(node_cpu_seconds_total{mode="idle"}[30m])) by (instance) < 20 and on(instance) count(node_cpu_seconds_total{mode="idle"}) without (cpu,mode) > 1'
+      expr: '100 * avg(1 - rate(node_cpu_seconds_total{mode="idle", instance!="pve.trox.lan:9100"}[30m])) by (instance) < 20 and on(instance) count(node_cpu_seconds_total{mode="idle"}) without (cpu,mode) > 1'
       for: 1w
       labels:
         severity: info

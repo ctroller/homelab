@@ -20,7 +20,6 @@
     "fiscalYearStartMonth": 0,
     "gnetId": 14284,
     "graphTooltip": 0,
-    "id": 35,
     "links": [
       {
         "asDropdown": true,
@@ -74,6 +73,7 @@
         "fieldConfig": {
           "defaults": {
             "custom": {
+              "align": "auto",
               "cellOptions": {
                 "type": "auto"
               },
@@ -2781,6 +2781,7 @@
         "fieldConfig": {
           "defaults": {
             "custom": {
+              "align": "auto",
               "cellOptions": {
                 "type": "auto"
               },
@@ -3581,7 +3582,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "#299c46"
+                  "color": "#299c46",
+                  "value": null
                 },
                 {
                   "color": "yellow",
@@ -3601,7 +3603,8 @@
                 }
               ]
             },
-            "unit": "none"
+            "unit": "none",
+            "unitScale": true
           },
           "overrides": []
         },
@@ -3626,10 +3629,12 @@
             "fields": "",
             "values": false
           },
+          "showPercentChange": false,
           "text": {},
-          "textMode": "value"
+          "textMode": "value",
+          "wideLayout": true
         },
-        "pluginVersion": "7.5.6",
+        "pluginVersion": "10.3.3",
         "repeatDirection": "h",
         "targets": [
           {
@@ -3667,7 +3672,8 @@
         "description": "",
         "fieldConfig": {
           "defaults": {
-            "unit": "bytes"
+            "unit": "bytes",
+            "unitScale": true
           },
           "overrides": []
         },
@@ -3701,7 +3707,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "7.5.6",
+        "pluginVersion": "10.3.3",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -3824,11 +3830,13 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "dark-blue"
+                  "color": "dark-blue",
+                  "value": null
                 }
               ]
             },
-            "unit": "bytes"
+            "unit": "bytes",
+            "unitScale": true
           },
           "overrides": []
         },
@@ -3853,10 +3861,12 @@
             "fields": "",
             "values": false
           },
+          "showPercentChange": false,
           "text": {},
-          "textMode": "value"
+          "textMode": "value",
+          "wideLayout": true
         },
-        "pluginVersion": "7.5.6",
+        "pluginVersion": "10.3.3",
         "repeatDirection": "h",
         "targets": [
           {
@@ -3890,11 +3900,14 @@
             },
             "decimals": 2,
             "mappings": [],
+            "max": 100,
+            "min": 0,
             "thresholds": {
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "dark-green"
+                  "color": "dark-green",
+                  "value": null
                 },
                 {
                   "color": "light-yellow",
@@ -3910,7 +3923,8 @@
                 }
               ]
             },
-            "unit": "percent"
+            "unit": "percent",
+            "unitScale": true
           },
           "overrides": []
         },
@@ -3924,6 +3938,8 @@
         "links": [],
         "maxDataPoints": 100,
         "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
           "orientation": "auto",
           "reduceOptions": {
             "calcs": [
@@ -3934,9 +3950,10 @@
           },
           "showThresholdLabels": false,
           "showThresholdMarkers": true,
+          "sizing": "auto",
           "text": {}
         },
-        "pluginVersion": "7.5.6",
+        "pluginVersion": "10.3.3",
         "repeatDirection": "h",
         "targets": [
           {
@@ -3958,7 +3975,7 @@
         "type": "gauge"
       },
       {
-        "collapsed": true,
+        "collapsed": false,
         "datasource": {
           "type": "prometheus",
           "uid": "PBFA97CFB590B2093"
@@ -3970,314 +3987,7 @@
           "y": 60
         },
         "id": 374,
-        "panels": [
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "description": "",
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "dark-blue"
-                    }
-                  ]
-                },
-                "unit": "bytes"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 2,
-              "w": 3,
-              "x": 0,
-              "y": 43
-            },
-            "id": 453,
-            "links": [],
-            "maxDataPoints": 100,
-            "options": {
-              "colorMode": "background",
-              "graphMode": "none",
-              "justifyMode": "center",
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "text": {},
-              "textMode": "value"
-            },
-            "pluginVersion": "7.5.6",
-            "repeatDirection": "h",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "PBFA97CFB590B2093"
-                },
-                "exemplar": true,
-                "expr": "hrStorageSize{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'} * hrStorageAllocationUnits{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'}",
-                "format": "time_series",
-                "instant": false,
-                "interval": "",
-                "intervalFactor": 1,
-                "legendFormat": "",
-                "refId": "A"
-              }
-            ],
-            "title": "File System Size",
-            "type": "stat"
-          },
-          {
-            "aliasColors": {
-              "0x566F6C756D652031 Free Size": "dark-green",
-              "0x566F6C756D652031 Total Size": "yellow",
-              "Free Size": "dark-green",
-              "Total Size": "orange"
-            },
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "description": "",
-            "fieldConfig": {
-              "defaults": {
-                "unit": "bytes"
-              },
-              "overrides": []
-            },
-            "fill": 10,
-            "fillGradient": 0,
-            "gridPos": {
-              "h": 8,
-              "w": 21,
-              "x": 3,
-              "y": 43
-            },
-            "hiddenSeries": false,
-            "id": 404,
-            "legend": {
-              "alignAsTable": true,
-              "avg": false,
-              "current": true,
-              "hideEmpty": false,
-              "max": true,
-              "min": true,
-              "rightSide": true,
-              "show": true,
-              "total": false,
-              "values": true
-            },
-            "lines": true,
-            "linewidth": 1,
-            "maxPerRow": 6,
-            "nullPointMode": "connected",
-            "options": {
-              "alertThreshold": true
-            },
-            "percentage": false,
-            "pluginVersion": "7.5.6",
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "repeatDirection": "h",
-            "seriesOverrides": [
-              {
-                "$$hashKey": "object:411",
-                "alias": "Size",
-                "color": "#C4162A",
-                "fill": 0,
-                "linewidth": 2,
-                "stack": false
-              },
-              {
-                "$$hashKey": "object:481",
-                "alias": "Free",
-                "color": "rgba(0, 0, 0, 0)",
-                "fill": 0
-              },
-              {
-                "$$hashKey": "object:489",
-                "alias": "Used",
-                "color": "rgb(0, 98, 255)",
-                "fillGradient": 9,
-                "linewidth": 2,
-                "stack": false
-              }
-            ],
-            "spaceLength": 10,
-            "stack": true,
-            "steppedLine": false,
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "PBFA97CFB590B2093"
-                },
-                "exemplar": true,
-                "expr": "hrStorageSize{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'} * hrStorageAllocationUnits{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'}",
-                "instant": false,
-                "interval": "",
-                "legendFormat": "Size",
-                "refId": "A"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "PBFA97CFB590B2093"
-                },
-                "exemplar": true,
-                "expr": "hrStorageUsed{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'} * hrStorageAllocationUnits{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'}",
-                "hide": false,
-                "interval": "",
-                "intervalFactor": 1,
-                "legendFormat": "Used",
-                "refId": "C"
-              },
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "PBFA97CFB590B2093"
-                },
-                "exemplar": true,
-                "expr": "(hrStorageSize{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'} -  hrStorageUsed{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'}) * hrStorageAllocationUnits{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'}\n",
-                "hide": false,
-                "instant": false,
-                "interval": "",
-                "legendFormat": "Free",
-                "refId": "B"
-              }
-            ],
-            "thresholds": [],
-            "timeRegions": [],
-            "title": "File System Usage: $hrStorageDescr ($Device)",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "mode": "time",
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "$$hashKey": "object:1861",
-                "format": "bytes",
-                "logBase": 1,
-                "min": "0",
-                "show": true
-              },
-              {
-                "$$hashKey": "object:1862",
-                "format": "short",
-                "logBase": 1,
-                "min": "0",
-                "show": true
-              }
-            ],
-            "yaxis": {
-              "align": false
-            }
-          },
-          {
-            "datasource": {
-              "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
-            },
-            "description": "",
-            "fieldConfig": {
-              "defaults": {
-                "color": {
-                  "mode": "thresholds"
-                },
-                "decimals": 2,
-                "mappings": [],
-                "thresholds": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "dark-green"
-                    },
-                    {
-                      "color": "light-yellow",
-                      "value": 80
-                    },
-                    {
-                      "color": "dark-orange",
-                      "value": 85
-                    },
-                    {
-                      "color": "dark-red",
-                      "value": 90
-                    }
-                  ]
-                },
-                "unit": "percent"
-              },
-              "overrides": []
-            },
-            "gridPos": {
-              "h": 4,
-              "w": 3,
-              "x": 0,
-              "y": 45
-            },
-            "id": 610,
-            "links": [],
-            "maxDataPoints": 100,
-            "options": {
-              "orientation": "auto",
-              "reduceOptions": {
-                "calcs": [
-                  "lastNotNull"
-                ],
-                "fields": "",
-                "values": false
-              },
-              "showThresholdLabels": false,
-              "showThresholdMarkers": true,
-              "text": {}
-            },
-            "pluginVersion": "7.5.6",
-            "repeatDirection": "h",
-            "targets": [
-              {
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "PBFA97CFB590B2093"
-                },
-                "exemplar": true,
-                "expr": "(hrStorageUsed{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'} /hrStorageSize{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'})*100",
-                "format": "time_series",
-                "instant": false,
-                "interval": "",
-                "intervalFactor": 1,
-                "legendFormat": "% Used",
-                "refId": "A"
-              }
-            ],
-            "title": "% Used Space",
-            "type": "gauge"
-          }
-        ],
+        "panels": [],
         "repeat": "hrStorageDescr",
         "targets": [
           {
@@ -4292,6 +4002,325 @@
         "type": "row"
       },
       {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-blue",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "bytes",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 2,
+          "w": 3,
+          "x": 0,
+          "y": 61
+        },
+        "id": 453,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "value",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.3.3",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
+            "exemplar": true,
+            "expr": "hrStorageSize{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'} * hrStorageAllocationUnits{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'}",
+            "format": "time_series",
+            "instant": false,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "",
+            "refId": "A"
+          }
+        ],
+        "title": "File System Size",
+        "type": "stat"
+      },
+      {
+        "aliasColors": {
+          "0x566F6C756D652031 Free Size": "dark-green",
+          "0x566F6C756D652031 Total Size": "yellow",
+          "Free Size": "dark-green",
+          "Total Size": "orange"
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "bytes",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "fill": 10,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 8,
+          "w": 21,
+          "x": 3,
+          "y": 61
+        },
+        "hiddenSeries": false,
+        "id": 404,
+        "legend": {
+          "alignAsTable": true,
+          "avg": false,
+          "current": true,
+          "hideEmpty": false,
+          "max": true,
+          "min": true,
+          "rightSide": true,
+          "show": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "maxPerRow": 6,
+        "nullPointMode": "connected",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "10.3.3",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "repeatDirection": "h",
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:411",
+            "alias": "Size",
+            "color": "#C4162A",
+            "fill": 0,
+            "linewidth": 2,
+            "stack": false
+          },
+          {
+            "$$hashKey": "object:481",
+            "alias": "Free",
+            "color": "rgba(0, 0, 0, 0)",
+            "fill": 0
+          },
+          {
+            "$$hashKey": "object:489",
+            "alias": "Used",
+            "color": "rgb(0, 98, 255)",
+            "fillGradient": 9,
+            "linewidth": 2,
+            "stack": false
+          }
+        ],
+        "spaceLength": 10,
+        "stack": true,
+        "steppedLine": false,
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
+            "editorMode": "code",
+            "exemplar": true,
+            "expr": "hrStorageSize{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'} * hrStorageAllocationUnits{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'}",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "Size",
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
+            "exemplar": true,
+            "expr": "hrStorageUsed{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'} * hrStorageAllocationUnits{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'}",
+            "hide": false,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "Used",
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
+            "exemplar": true,
+            "expr": "(hrStorageSize{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'} -  hrStorageUsed{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'}) * hrStorageAllocationUnits{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'}\n",
+            "hide": false,
+            "instant": false,
+            "interval": "",
+            "legendFormat": "Free",
+            "refId": "B"
+          }
+        ],
+        "thresholds": [],
+        "timeRegions": [],
+        "title": "File System Usage: $hrStorageDescr ($Device)",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "mode": "time",
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:1861",
+            "format": "bytes",
+            "logBase": 1,
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:1862",
+            "format": "short",
+            "logBase": 1,
+            "min": "0",
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false
+        }
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 2,
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "dark-green",
+                  "value": null
+                },
+                {
+                  "color": "light-yellow",
+                  "value": 80
+                },
+                {
+                  "color": "dark-orange",
+                  "value": 85
+                },
+                {
+                  "color": "dark-red",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "percent",
+            "unitScale": true
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 0,
+          "y": 63
+        },
+        "id": 610,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto",
+          "text": {}
+        },
+        "pluginVersion": "10.3.3",
+        "repeatDirection": "h",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
+            "exemplar": true,
+            "expr": "(hrStorageUsed{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'} /hrStorageSize{job=~'$JobName',instance=~'$Device',hrStorageDescr=~'$hrStorageDescr'})*100",
+            "format": "time_series",
+            "instant": false,
+            "interval": "",
+            "intervalFactor": 1,
+            "legendFormat": "% Used",
+            "refId": "A"
+          }
+        ],
+        "title": "% Used Space",
+        "type": "gauge"
+      },
+      {
         "collapsed": true,
         "datasource": {
           "type": "prometheus",
@@ -4301,7 +4330,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 61
+          "y": 69
         },
         "id": 28,
         "panels": [
@@ -4708,7 +4737,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 64
+          "y": 72
         },
         "id": 876,
         "panels": [
@@ -5397,7 +5426,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 65
+          "y": 73
         },
         "id": 654,
         "panels": [
@@ -5731,7 +5760,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 66
+          "y": 74
         },
         "id": 17,
         "panels": [
@@ -6527,7 +6556,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 67
+          "y": 77
         },
         "id": 39,
         "panels": [
@@ -6780,7 +6809,7 @@
           "h": 1,
           "w": 24,
           "x": 0,
-          "y": 68
+          "y": 78
         },
         "id": 814,
         "panels": [
@@ -7372,15 +7401,19 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "definition": "label_values(ifName{job=~'$JobName',instance=~'$Device'},ifName)",
+          "definition": "label_values(ifType_info{job=\"$JobName\", instance=\"$Device\"},ifName)",
           "description": "Regex controls interfaces to show.  Default: ^eth.*|^bond.*|^docker[0-9]",
           "hide": 0,
           "includeAll": true,
@@ -7388,8 +7421,9 @@
           "name": "Interface",
           "options": [],
           "query": {
-            "query": "label_values(ifName{job=~'$JobName',instance=~'$Device'},ifName)",
-            "refId": "StandardVariableQuery"
+            "qryType": 1,
+            "query": "label_values(ifType_info{job=\"$JobName\", instance=\"$Device\"},ifName)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
           "regex": "^eth.*|^bond.*|^docker[0-9]",
@@ -7400,15 +7434,19 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "definition": "label_values(ifName{job=~'$JobName',instance=~'$Device'},ifName)",
+          "definition": "label_values(ifType_info{instance=\"$Device\", job=\"$JobName\"},ifName)",
           "description": "Physical Network Interfaces",
           "hide": 0,
           "includeAll": true,
@@ -7417,8 +7455,9 @@
           "name": "InterfacePhysical",
           "options": [],
           "query": {
-            "query": "label_values(ifName{job=~'$JobName',instance=~'$Device'},ifName)",
-            "refId": "StandardVariableQuery"
+            "qryType": 1,
+            "query": "label_values(ifType_info{instance=\"$Device\", job=\"$JobName\"},ifName)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
           "regex": "^eth.*",
@@ -7431,15 +7470,19 @@
         },
         {
           "current": {
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "definition": "label_values(ifType_info{job=~'$JobName',instance=~'$Device'},ifName)",
+          "definition": "label_values(ifType_info{job=~\"$JobName\", instance=~\"$Device\"},ifName)",
           "description": "Bonds an VLans",
           "hide": 0,
           "includeAll": true,
@@ -7448,8 +7491,9 @@
           "name": "InterfaceVirtual",
           "options": [],
           "query": {
-            "query": "label_values(ifType_info{job=~'$JobName',instance=~'$Device'},ifName)",
-            "refId": "StandardVariableQuery"
+            "qryType": 1,
+            "query": "label_values(ifType_info{job=~\"$JobName\", instance=~\"$Device\"},ifName)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
           },
           "refresh": 2,
           "regex": "^bond.*",
@@ -7781,6 +7825,6 @@
     "timezone": "browser",
     "title": "Synology NAS Details",
     "uid": "i55CRAlMk",
-    "version": 2,
+    "version": 10,
     "weekStart": ""
   }

@@ -61,7 +61,7 @@ scrape_configs:
   - job_name: 'speedtest'
     metrics_path: /probe
     scrape_interval: 300s
-    scrape_timeout: 60s
+    scrape_timeout: 300s
     static_configs:
     - targets:
       - pve.trox.lan:9516
