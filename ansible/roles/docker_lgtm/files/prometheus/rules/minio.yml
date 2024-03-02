@@ -6,7 +6,7 @@ groups:
 
     - alert: MinioClusterDiskOffline
       expr: 'minio_cluster_disk_offline_total > 0'
-      for: 0m
+      for: 1m
       labels:
         severity: critical
       annotations:
@@ -15,7 +15,7 @@ groups:
 
     - alert: MinioNodeDiskOffline
       expr: 'minio_cluster_nodes_offline_total > 0'
-      for: 0m
+      for: 1m
       labels:
         severity: critical
       annotations:
@@ -24,7 +24,7 @@ groups:
 
     - alert: MinioDiskSpaceUsage
       expr: 'disk_storage_available / disk_storage_total * 100 < 10'
-      for: 0m
+      for: 1m
       labels:
         severity: warning
       annotations:

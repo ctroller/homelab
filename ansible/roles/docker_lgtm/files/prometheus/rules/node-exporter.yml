@@ -95,8 +95,8 @@ groups:
         description: "Disk is almost running out of available inodes (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: HostFilesystemDeviceError
-      expr: 'node_filesystem_device_error == 1'
-      for: 0m
+      expr: 'node_filesystem_device_error{instance!="hass.trox.lan:9100"} == 1'
+      for: 1m
       labels:
         severity: critical
       annotations:
@@ -150,7 +150,7 @@ groups:
 
     - alert: HostCpuStealNoisyNeighbor
       expr: '(avg by(instance) (rate(node_cpu_seconds_total{mode="steal"}[5m])) * 100 > 10) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
-      for: 0m
+      for: 1m
       labels:
         severity: warning
       annotations:
@@ -159,7 +159,7 @@ groups:
 
     - alert: HostCpuHighIowait
       expr: '(avg by (instance) (rate(node_cpu_seconds_total{mode="iowait"}[5m])) * 100 > 10) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
-      for: 0m
+      for: 1m
       labels:
         severity: warning
       annotations:
@@ -177,7 +177,7 @@ groups:
 
     - alert: HostContextSwitching
       expr: '((rate(node_context_switches_total[5m])) / (count without(cpu, mode) (node_cpu_seconds_total{mode="idle"})) > 10000) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
-      for: 0m
+      for: 1m
       labels:
         severity: warning
       annotations:
@@ -195,7 +195,7 @@ groups:
 
     - alert: HostSystemdServiceCrashed
       expr: '(node_systemd_unit_state{state="failed"} == 1) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
-      for: 0m
+      for: 1m
       labels:
         severity: warning
       annotations:
@@ -213,7 +213,7 @@ groups:
 
     - alert: HostNodeOvertemperatureAlarm
       expr: '(node_hwmon_temp_crit_alarm_celsius == 1) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
-      for: 0m
+      for: 1m
       labels:
         severity: critical
       annotations:
@@ -222,7 +222,7 @@ groups:
 
     - alert: HostRaidArrayGotInactive
       expr: '(node_md_state{state="inactive"} > 0) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
-      for: 0m
+      for: 1m
       labels:
         severity: critical
       annotations:
@@ -249,7 +249,7 @@ groups:
 
     - alert: HostOomKillDetected
       expr: '(increase(node_vmstat_oom_kill[1m]) > 0) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
-      for: 0m
+      for: 1m
       labels:
         severity: warning
       annotations:
@@ -258,7 +258,7 @@ groups:
 
     - alert: HostEdacCorrectableErrorsDetected
       expr: '(increase(node_edac_correctable_errors_total[1m]) > 0) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
-      for: 0m
+      for: 1m
       labels:
         severity: info
       annotations:
@@ -267,7 +267,7 @@ groups:
 
     - alert: HostEdacUncorrectableErrorsDetected
       expr: '(node_edac_uncorrectable_errors_total > 0) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
-      for: 0m
+      for: 1m
       labels:
         severity: warning
       annotations:
