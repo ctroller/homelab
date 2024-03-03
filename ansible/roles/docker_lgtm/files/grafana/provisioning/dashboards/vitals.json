@@ -41,7 +41,7 @@
       },
       "gridPos": {
         "h": 14,
-        "w": 5,
+        "w": 3,
         "x": 0,
         "y": 1
       },
@@ -77,12 +77,11 @@
             "mode": "thresholds"
           },
           "custom": {
-            "align": "auto",
+            "align": "left",
             "cellOptions": {
               "type": "auto"
             },
-            "inspect": false,
-            "width": 120
+            "inspect": false
           },
           "decimals": 2,
           "fieldMinMax": true,
@@ -226,8 +225,8 @@
       },
       "gridPos": {
         "h": 14,
-        "w": 5,
-        "x": 5,
+        "w": 8,
+        "x": 3,
         "y": 1
       },
       "id": 3,
@@ -457,8 +456,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 3,
-        "x": 10,
+        "w": 5,
+        "x": 11,
         "y": 1
       },
       "id": 5,
@@ -538,8 +537,8 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 4,
-        "x": 13,
+        "w": 8,
+        "x": 16,
         "y": 1
       },
       "hideTimeOverride": true,
@@ -581,6 +580,454 @@
       ],
       "title": "Uptime",
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "Busy state of all CPU cores together",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 85
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percent",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 2,
+        "x": 16,
+        "y": 3
+      },
+      "id": 8,
+      "links": [],
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(sum by(instance) (irate(node_cpu_seconds_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\", mode!=\"idle\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval])))) * 100",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "range": false,
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "CPU Busy",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "Busy state of all CPU cores together (15 min average)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 85
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percent",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 2,
+        "x": 18,
+        "y": 3
+      },
+      "id": 14,
+      "links": [],
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "avg_over_time(node_load15{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) * 100 / on(instance) group_left sum by (instance)(irate(node_cpu_seconds_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]))",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "range": false,
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "Sys Load (15m avg)",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "Non available RAM memory",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 80
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 2,
+        "x": 20,
+        "y": 3
+      },
+      "hideTimeOverride": false,
+      "id": 9,
+      "links": [],
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "((avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) - avg_over_time(node_memory_MemFree_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval])) / (avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) )) * 100",
+          "format": "time_series",
+          "hide": true,
+          "instant": true,
+          "intervalFactor": 1,
+          "range": false,
+          "refId": "A",
+          "step": 240
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100 - ((avg_over_time(node_memory_MemAvailable_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) * 100) / avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]))",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "range": false,
+          "refId": "B",
+          "step": 240
+        }
+      ],
+      "title": "RAM Used",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "Used Root FS",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 80
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 2,
+        "x": 22,
+        "y": 3
+      },
+      "id": 11,
+      "links": [],
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "100 - ((avg_over_time(node_filesystem_avail_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\",mountpoint=\"/\",fstype!=\"rootfs\"}[$__rate_interval]) * 100) / avg_over_time(node_filesystem_size_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\",mountpoint=\"/\",fstype!=\"rootfs\"}[$__rate_interval]))",
+          "format": "time_series",
+          "instant": true,
+          "intervalFactor": 1,
+          "range": false,
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "Root FS Used",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlYlRd"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "celsius",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 11,
+        "y": 8
+      },
+      "id": 1,
+      "options": {
+        "displayMode": "gradient",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "top",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "avg(node_hwmon_temp_celsius) by (instance, chip)",
+          "instant": false,
+          "legendFormat": "{{chip}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "NUC Temperatures",
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -1005,9 +1452,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 7,
-        "x": 17,
-        "y": 1
+        "w": 8,
+        "x": 16,
+        "y": 8
       },
       "id": 17,
       "links": [],
@@ -1056,454 +1503,6 @@
       ],
       "title": "Network Traffic Basic",
       "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "Busy state of all CPU cores together",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 85
-              },
-              {
-                "color": "rgba(245, 54, 54, 0.9)",
-                "value": 95
-              }
-            ]
-          },
-          "unit": "percent",
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 2,
-        "x": 13,
-        "y": 3
-      },
-      "id": 8,
-      "links": [],
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "10.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "(sum by(instance) (irate(node_cpu_seconds_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\", mode!=\"idle\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval])))) * 100",
-          "hide": false,
-          "instant": true,
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "range": false,
-          "refId": "A",
-          "step": 240
-        }
-      ],
-      "title": "CPU Busy",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "Busy state of all CPU cores together (15 min average)",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 85
-              },
-              {
-                "color": "rgba(245, 54, 54, 0.9)",
-                "value": 95
-              }
-            ]
-          },
-          "unit": "percent",
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 2,
-        "x": 15,
-        "y": 3
-      },
-      "id": 14,
-      "links": [],
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "10.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg_over_time(node_load15{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) * 100 / on(instance) group_left sum by (instance)(irate(node_cpu_seconds_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]))",
-          "hide": false,
-          "instant": true,
-          "intervalFactor": 1,
-          "range": false,
-          "refId": "A",
-          "step": 240
-        }
-      ],
-      "title": "Sys Load (15m avg)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-BlYlRd"
-          },
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "celsius",
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 3,
-        "x": 10,
-        "y": 8
-      },
-      "id": 1,
-      "options": {
-        "displayMode": "gradient",
-        "maxVizHeight": 300,
-        "minVizHeight": 16,
-        "minVizWidth": 8,
-        "namePlacement": "top",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
-      },
-      "pluginVersion": "10.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "editorMode": "code",
-          "expr": "avg(node_hwmon_temp_celsius) by (instance, chip)",
-          "instant": false,
-          "legendFormat": "{{chip}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "NUC Temperatures",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "Non available RAM memory",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 80
-              },
-              {
-                "color": "rgba(245, 54, 54, 0.9)",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "percent",
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 2,
-        "x": 13,
-        "y": 9
-      },
-      "hideTimeOverride": false,
-      "id": 9,
-      "links": [],
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "10.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "((avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) - avg_over_time(node_memory_MemFree_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval])) / (avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) )) * 100",
-          "format": "time_series",
-          "hide": true,
-          "instant": true,
-          "intervalFactor": 1,
-          "range": false,
-          "refId": "A",
-          "step": 240
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "100 - ((avg_over_time(node_memory_MemAvailable_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) * 100) / avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]))",
-          "format": "time_series",
-          "hide": false,
-          "instant": true,
-          "intervalFactor": 1,
-          "range": false,
-          "refId": "B",
-          "step": 240
-        }
-      ],
-      "title": "RAM Used",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "Used Root FS",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 80
-              },
-              {
-                "color": "rgba(245, 54, 54, 0.9)",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "percent",
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 2,
-        "x": 15,
-        "y": 9
-      },
-      "id": 11,
-      "links": [],
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "10.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "100 - ((avg_over_time(node_filesystem_avail_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\",mountpoint=\"/\",fstype!=\"rootfs\"}[$__rate_interval]) * 100) / avg_over_time(node_filesystem_size_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\",mountpoint=\"/\",fstype!=\"rootfs\"}[$__rate_interval]))",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "range": false,
-          "refId": "A",
-          "step": 240
-        }
-      ],
-      "title": "Root FS Used",
-      "type": "gauge"
     },
     {
       "gridPos": {
@@ -2826,12 +2825,24 @@
                 "value": "Downloaded"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 239
+              }
+            ]
           }
         ]
       },
       "gridPos": {
         "h": 9,
-        "w": 19,
+        "w": 9,
         "x": 0,
         "y": 32
       },
@@ -2880,17 +2891,25 @@
               "Time": true,
               "Value": true,
               "__name__": true,
+              "amount_left": true,
               "container": true,
+              "downloaded": true,
               "downloaded_session": true,
               "endpoint": true,
               "instance": true,
               "job": true,
+              "leechers": true,
               "max_ratio": true,
               "namespace": true,
               "pod": true,
+              "ratio": true,
               "service": true,
+              "size": true,
+              "up_speed": true,
+              "uploaded": true,
               "uploaded_session": true
             },
+            "includeByName": {},
             "indexByName": {
               "Time": 3,
               "Value": 20,
@@ -2983,8 +3002,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 19,
+        "w": 3,
+        "x": 9,
         "y": 32
       },
       "id": 20,
@@ -3027,6 +3046,93 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              },
+              {
+                "color": "green",
+                "value": 5
+              }
+            ]
+          },
+          "unit": "decbytes",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 12,
+        "y": 32
+      },
+      "hideTimeOverride": false,
+      "id": 23,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "expr": "sabnzbd_queue_download_rate_bytes_per_second",
+          "format": "time_series",
+          "hide": true,
+          "intervalFactor": 1,
+          "refId": "A",
+          "step": 900
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "expr": "sabnzbd_queue_download_rate_bytes_per_second",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "refId": "B",
+          "step": 900
+        }
+      ],
+      "title": "NZB Download speed",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -3054,8 +3160,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 19,
+        "w": 3,
+        "x": 9,
         "y": 35
       },
       "id": 22,
@@ -3119,6 +3225,86 @@
             "mode": "absolute",
             "steps": [
               {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 12,
+        "y": 35
+      },
+      "id": 24,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "expr": "sabnzbd_queue_total_size_bytes",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "NZB Queue total size",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
                 "color": "rgb(33, 33, 35)",
                 "value": null
               },
@@ -3138,8 +3324,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 5,
-        "x": 19,
+        "w": 3,
+        "x": 9,
         "y": 38
       },
       "id": 21,
@@ -3175,6 +3361,87 @@
         }
       ],
       "title": "Global Upload Speed",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "dtdurations",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 12,
+        "y": 38
+      },
+      "id": 25,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "expr": "sabnzbd_queue_remaining_seconds",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "NZB Download time remaining",
       "type": "stat"
     },
     {
@@ -3302,254 +3569,6 @@
       "title": "Printer Ink",
       "transformations": [],
       "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bytes",
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 13,
-        "y": 41
-      },
-      "id": 24,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "expr": "sabnzbd_queue_total_size_bytes",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "NZB Queue total size",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "orange",
-                "value": 1
-              },
-              {
-                "color": "green",
-                "value": 5
-              }
-            ]
-          },
-          "unit": "decbytes",
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 16,
-        "y": 41
-      },
-      "hideTimeOverride": false,
-      "id": 23,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "expr": "sabnzbd_queue_download_rate_bytes_per_second",
-          "format": "time_series",
-          "hide": true,
-          "intervalFactor": 1,
-          "refId": "A",
-          "step": 900
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "expr": "sabnzbd_queue_download_rate_bytes_per_second",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 1,
-          "refId": "B",
-          "step": 900
-        }
-      ],
-      "title": "NZB Download speed",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "dtdurations",
-          "unitScale": true
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 5,
-        "x": 19,
-        "y": 41
-      },
-      "id": 25,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "10.3.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "expr": "sabnzbd_queue_remaining_seconds",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "NZB Download time remaining",
-      "type": "stat"
     }
   ],
   "refresh": "30s",
@@ -3566,6 +3585,6 @@
   "timezone": "",
   "title": "Homelab Vitals",
   "uid": "e3b40573-041b-4481-a46e-aaf42da7258a",
-  "version": 20,
+  "version": 21,
   "weekStart": ""
 }
