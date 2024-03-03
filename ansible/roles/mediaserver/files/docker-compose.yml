@@ -82,56 +82,6 @@ services:
     env_file: .env
     restart: unless-stopped
 
-  qbittorrent:
-    image: linuxserver/qbittorrent
-    container_name: qbittorrent
-    volumes:
-      - "./qbittorrent:/config"
-      - "./gluetun:/gluetun"
-      - "${DATA_DIR}/torrents:/downloads"
-    environment:
-      - WEBUI_PORT=8081
-    network_mode: "service:gluetun"
-    env_file: .env
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "/config/qbit-healthcheck.sh"]
-      interval: 20s
-      timeout: 10s
-      start_period: 30s
-
-  gluetun:
-    image: qmcgaw/gluetun
-    container_name: gluetun
-    cap_add:
-      - NET_ADMIN
-    devices:
-      - /dev/net/tun:/dev/net/tun
-    volumes:
-      - ./gluetun:/gluetun
-    ports:
-      - "8889:8888/tcp" # HTTP proxy
-      - "8388:8388/tcp" # Shadowsocks
-      - "8388:8388/udp" # Shadowsocks
-      # sabnzbd
-      - "8082:8080"
-      # qbittorrent
-      - "8081:8081"
-      - "51934:51934"
-      - "51934:51934/udp"
-    env_file: .env
-    restart: unless-stopped
-
-  sabnzbd:
-    image: linuxserver/sabnzbd
-    container_name: sabnzbd
-    volumes:
-      - "./sabnzbd:/config"
-      - "${DATA_DIR}/usenet:/downloads"
-    network_mode: "service:gluetun"
-    env_file: .env
-    restart: unless-stopped
-
   overseerr:
     image: linuxserver/overseerr
     container_name: overseerr

@@ -5,7 +5,7 @@
     - ../../.vault
 
   tasks:
-    - name: Include prom-rule
+    - name: Include prom-config
       ansible.builtin.include_role:
         name: docker_lgtm
-        tasks_from: prom-rules
+        tasks_from: prom-config
