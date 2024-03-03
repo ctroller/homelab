@@ -66,14 +66,6 @@ scrape_configs:
     static_configs:
       - targets: ['synology.trox.lan:9116']
 
-  - job_name: 'speedtest'
-    metrics_path: /probe
-    scrape_interval: 90s
-    scrape_timeout: 90s
-    static_configs:
-    - targets:
-      - pve.trox.lan:9516
-
   - job_name: cadvisor
     static_configs:
       - targets:
