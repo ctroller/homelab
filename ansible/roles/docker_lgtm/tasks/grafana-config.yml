@@ -1,9 +1,53 @@
+
+- name: Set grafana managed files
+  ansible.builtin.set_fact:
+    templates_dirs: >
+      {{ lookup('community.general.filetree', 'templates/grafana', wantlist=True) | selectattr('state', 'equalto', 'directory') | map(attribute='path') }}
+    files_dirs: >
+      {{ lookup('community.general.filetree', 'files/grafana', wantlist=True) | selectattr("state", "equalto", "directory") | map(attribute='path') }}
+
+- name: Set directories to create
+  ansible.builtin.set_fact:
+    managed_templates: "{{ lookup('community.general.filetree', 'templates/grafana', wantlist=True) | map(attribute='path') }}"
+    managed_files: "{{ lookup('community.general.filetree', 'files/grafana', wantlist=True) | map(attribute='path') }}"
+
+- name: Set grafana managed files
+  ansible.builtin.set_fact:
+    managed: >
+      {{ (managed_files + managed_templates) | map("regex_replace", "^(.*)$", stack_location + "/grafana/\1") | map("regex_replace", "\.j2$", "") | list }}
+    managed_dirs: >
+      {{ ['.'] + ((templates_dirs + files_dirs) | list) }}
+      
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ stack_location }}/grafana/{{ item }}"
+    state: directory
+  loop: "{{ managed_dirs }}"
+  loop_control:
+    label: "{{ item }}"
+
+- name: Find existing files
+  ansible.builtin.find:
+    paths: "{{ stack_location }}/grafana"
+    file_type: file
+    recurse: true
+  register: existing
+
+- name: Remove unmanaged files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ existing.files | d([]) }}"
+  loop_control:
+    label: "{{ item.path }}"
+  when: item.path not in managed
+  notify: Restart grafana
+
 - name: Update grafana provisionings
   ansible.builtin.copy:
     src: "files/grafana/"
     dest: "{{ stack_location }}/grafana/"
     mode: "0644"
-  register: provisionings
   notify: Restart grafana
 
 - name: Template files
@@ -14,5 +58,4 @@
     mode: "0644"
   with_community.general.filetree: "{{ ['templates/grafana'] }}"
   when: item.state == 'file'
-  register: templates
   notify: Restart grafana

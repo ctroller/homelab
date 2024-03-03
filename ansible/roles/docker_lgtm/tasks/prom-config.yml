@@ -1,3 +1,47 @@
+- name: Set prometheus managed files
+  ansible.builtin.set_fact:
+    templates_dirs: >
+      {{ lookup('community.general.filetree', 'templates/prometheus', wantlist=True) | selectattr('state', 'equalto', 'directory') | map(attribute='path') }}
+    files_dirs: >
+      {{ lookup('community.general.filetree', 'files/prometheus', wantlist=True) | selectattr("state", "equalto", "directory") | map(attribute='path') }}
+
+- name: Set prometheus managed files
+  ansible.builtin.set_fact:
+    managed_templates: "{{ lookup('community.general.filetree', 'templates/prometheus', wantlist=True) | list | map(attribute='path') }}"
+    managed_files: "{{ lookup('community.general.filetree', 'files/prometheus', wantlist=True) | map(attribute='path') }}"
+
+- name: Set prometheus managed files
+  ansible.builtin.set_fact:
+    managed: >
+      {{ (managed_files + managed_templates) | map("regex_replace", "^(.*)$", stack_location + "/prometheus/\1") | map("regex_replace", "\.j2$", "") }}
+    managed_dirs: >
+      {{ ['.'] + ((templates_dirs + files_dirs) | list) }}
+      
+- name: Create directories
+  ansible.builtin.file:
+    path: "{{ stack_location }}/prometheus/{{ item }}"
+    state: directory
+  loop: "{{ managed_dirs }}"
+  loop_control:
+    label: "{{ item }}"
+
+- name: Find existing files
+  ansible.builtin.find:
+    paths: "{{ stack_location }}/prometheus"
+    file_type: file
+    recurse: true
+  register: existing
+
+- name: Remove unmanaged files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ existing.files | d([]) }}"
+  loop_control:
+    label: "{{ item.path }}"
+  when: item.path not in managed
+  notify: Restart prometheus
+
 - name: Update prometheus rules
   ansible.builtin.copy:
     src: "files/prometheus/rules/"

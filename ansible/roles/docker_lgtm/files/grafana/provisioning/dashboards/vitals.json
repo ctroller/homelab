@@ -77,7 +77,7 @@
             "mode": "thresholds"
           },
           "custom": {
-            "align": "left",
+            "align": "auto",
             "cellOptions": {
               "type": "auto"
             },
@@ -150,6 +150,10 @@
                 "value": {
                   "type": "color-text"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           },
@@ -202,6 +206,10 @@
                 "value": {
                   "type": "color-text"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           },
@@ -218,6 +226,22 @@
               {
                 "id": "decimals",
                 "value": 1
+              },
+              {
+                "id": "custom.width",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mem (last)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
@@ -3585,6 +3609,6 @@
   "timezone": "",
   "title": "Homelab Vitals",
   "uid": "e3b40573-041b-4481-a46e-aaf42da7258a",
-  "version": 21,
+  "version": 22,
   "weekStart": ""
 }
