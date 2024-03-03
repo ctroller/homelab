@@ -4,7 +4,7 @@
     dest: "{{ stack_location }}/prometheus/rules/"
     mode: "0644"
   register: rules
-  
+  notify: Restart prometheus
 
 - name: Template files
   ansible.builtin.template:
@@ -14,12 +14,4 @@
     mode: "0644"
   with_community.general.filetree: "{{ ['templates/prometheus'] }}"
   when: item.state == 'file'
-  register: templates
-
-- name: Restart prometheus
-  community.docker.docker_compose_v2:
-    project_src: "{{ stack_location }}"
-    services:
-      - prometheus
-    state: restarted
-  when: rules.changed or templates.changed
+  notify: Restart prometheus

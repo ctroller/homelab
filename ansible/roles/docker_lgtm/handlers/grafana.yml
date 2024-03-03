@@ -1,6 +1,6 @@
-- name: Restart prometheus
+- name: Restart grafana
   community.docker.docker_compose_v2:
     project_src: "{{ stack_location }}"
     services:
-      - prometheus
+      - grafana
     state: restarted
