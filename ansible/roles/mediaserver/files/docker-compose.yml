@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   plex:
@@ -108,7 +108,7 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     volumes:
-       - ./gluetun:/gluetun
+      - ./gluetun:/gluetun
     ports:
       - "8889:8888/tcp" # HTTP proxy
       - "8388:8388/tcp" # Shadowsocks
@@ -151,7 +151,6 @@ services:
     ports:
       - "8191:8191"
     restart: unless-stopped
-
 
   recyclarr:
     image: ghcr.io/recyclarr/recyclarr

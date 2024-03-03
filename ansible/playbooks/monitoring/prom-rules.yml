@@ -9,4 +9,3 @@
       ansible.builtin.include_role:
         name: docker_lgtm
         tasks_from: prom-rules
-        

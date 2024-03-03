@@ -1,0 +1,7 @@
+- name: Restart prometheus
+  community.docker.docker_compose_v2:
+    project_src: "{{ stack_location }}"
+    services:
+      - prometheus
+    state: restarted
+  when: rules.changed

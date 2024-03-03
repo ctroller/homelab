@@ -3,12 +3,4 @@
     src: "files/prometheus/rules/"
     dest: "{{ stack_location }}/prometheus/rules/"
     mode: "0644"
-  register: rules
-
-- name: Restart prometheus
-  community.docker.docker_compose_v2:
-    project_src: "{{ stack_location }}"
-    services:
-      - prometheus
-    state: restarted
-  when: rules.changed
+  notify: Restart prometheus
