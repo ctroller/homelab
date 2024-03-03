@@ -3,6 +3,7 @@
     src: files/
     dest: /srv/docker/grafana_agent/
     mode: "0644"
+  register: files
 
 - name: Create container
   community.docker.docker_container:
@@ -17,6 +18,6 @@
       - "/var/run/docker.sock:/var/run/docker.sock"
     ports:
       - "12345:12345"
-    state: started
+    state: "started"
     restart_policy: unless-stopped
-    recreate: true
+    restart: "{{ files.changed }}"
