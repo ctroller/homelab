@@ -1,0 +1,11 @@
+- name: Update grafana config
+  hosts: monitoring
+
+  vars_files:
+    - ../../.vault
+
+  tasks:
+    - name: Include grafana-config
+      ansible.builtin.include_role:
+        name: docker_lgtm
+        tasks_from: grafana-config

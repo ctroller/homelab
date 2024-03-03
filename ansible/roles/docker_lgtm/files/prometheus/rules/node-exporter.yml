@@ -95,7 +95,7 @@ groups:
         description: "Disk is almost running out of available inodes (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: HostFilesystemDeviceError
-      expr: 'node_filesystem_device_error{instance!="hass.trox.lan:9100"} == 1'
+      expr: 'node_filesystem_device_error{instance!="homeassistant.trox.lan:9100"} == 1'
       for: 1m
       labels:
         severity: critical

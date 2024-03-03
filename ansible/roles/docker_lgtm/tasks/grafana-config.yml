@@ -1,0 +1,25 @@
+- name: Update grafana provisionings
+  ansible.builtin.copy:
+    src: "files/grafana/"
+    dest: "{{ stack_location }}/grafana/"
+    mode: "0644"
+  register: provisionings
+  
+
+- name: Template files
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ stack_location }}/grafana/{{ item.path | regex_replace('\\.j2$', '') }}"
+    force: true
+    mode: "0644"
+  with_community.general.filetree: "{{ ['templates/grafana'] }}"
+  when: item.state == 'file'
+  register: templates
+
+- name: Restart grafana
+  community.docker.docker_compose_v2:
+    project_src: "{{ stack_location }}"
+    services:
+      - grafana
+    state: restarted
+  when: provisionings.changed or templates.changed

@@ -52,3 +52,24 @@ services:
     network_mode: "service:gluetun"
     env_file: .env
     restart: unless-stopped
+
+  sabnzbd-exporter:
+    image: msroest/sabnzbd_exporter
+    container_name: sabnzbd-exporter
+    environment:
+      - SABNZBD_BASEURLS=https://sabnzbd.home.trox.dev/sabnzbd/
+    env_file: .env
+    ports:
+      - "9387:9387"
+    restart: unless-stopped
+
+  qbittorent-exporter:
+    image: ghcr.io/esanchezm/prometheus-qbittorrent-exporter
+    container_name: qbittorrent-exporter
+    environment:
+      - QBITTORRENT_HOST=http://gluetun
+      - QBITTORRENT_PORT=8081
+    env_file: .env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped

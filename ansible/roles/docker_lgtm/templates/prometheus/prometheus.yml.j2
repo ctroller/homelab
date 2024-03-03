@@ -38,6 +38,14 @@ scrape_configs:
     static_configs:
       - targets: ["loki:3100"]
 
+  - job_name: qbittorrent
+    static_configs:
+      - targets: ["downloader.trox.lan:8000"]
+
+  - job_name: sabnzbd
+    static_configs:
+      - targets: ["downloader.trox.lan:9387"]
+
   - job_name: 'snmp'
     static_configs:
       - targets:
