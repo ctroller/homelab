@@ -3590,6 +3590,7 @@
           ]
         }
       ],
+      "timeFrom": "1y",
       "title": "Printer Ink",
       "transformations": [],
       "type": "bargauge"
@@ -3609,6 +3610,6 @@
   "timezone": "",
   "title": "Homelab Vitals",
   "uid": "e3b40573-041b-4481-a46e-aaf42da7258a",
-  "version": 22,
+  "version": 1,
   "weekStart": ""
 }
