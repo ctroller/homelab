@@ -9,7 +9,7 @@
   community.docker.docker_container:
     name: grafana_agent
     image: "grafana/agent"
-    command: ["run", "--server.http.listen-addr=0.0.0.0:12345", "/etc/agent/config.river"]
+    command: ["run", "--server.http.listen-addr=0.0.0.0:12345", "/etc/agent/config.river", "--disable-reporting"]
     env:
       AGENT_MODE: flow
     volumes:
