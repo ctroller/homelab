@@ -23,7 +23,7 @@ groups:
         description: "The node is under heavy memory pressure. High rate of major page faults\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: HostMemoryIsUnderutilized
-      expr: '(100 - (avg_over_time(node_memory_MemAvailable_bytes[30m]) / node_memory_MemTotal_bytes * 100) < 20) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
+      expr: '(100 - (avg_over_time(node_memory_MemAvailable_bytes{instance!~"(pve|downloader|plexbox).trox.lan:9100"}[30m]) / node_memory_MemTotal_bytes * 100) < 20) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
       for: 1w
       labels:
         severity: info
@@ -140,7 +140,7 @@ groups:
         description: "CPU load is > 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: HostCpuIsUnderutilized
-      expr: '100 * avg(1 - rate(node_cpu_seconds_total{mode="idle", instance!="pve.trox.lan:9100"}[30m])) by (instance) < 20 and on(instance) count(node_cpu_seconds_total{mode="idle"}) without (cpu,mode) > 1'
+      expr: '100 * avg(1 - rate(node_cpu_seconds_total{mode="idle", instance!~"(pve|downloader|plexbox).trox.lan:9100"}[30m])) by (instance) < 20 and on(instance) count(node_cpu_seconds_total{mode="idle"}) without (cpu,mode) > 1'
       for: 1w
       labels:
         severity: info
@@ -158,7 +158,7 @@ groups:
         description: "CPU steal is > 10%. A noisy neighbor is killing VM performances or a spot instance may be out of credit.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
     - alert: HostCpuHighIowait
-      expr: '(avg by (instance) (rate(node_cpu_seconds_total{mode="iowait"}[5m])) * 100 > 10) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
+      expr: '(avg by (instance) (rate(node_cpu_seconds_total{mode="iowait"}[5m])) * 100 > 10) * on(instance) group_left (nodename) node_uname_info{nodename!~"^(downloader|pve|plexbox)"}'
       for: 1m
       labels:
         severity: warning
