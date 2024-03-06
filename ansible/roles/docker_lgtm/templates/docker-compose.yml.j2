@@ -120,6 +120,15 @@ services:
       - ./loki/:/etc/loki
     restart: unless-stopped
 
+  blackbox:
+    image: prom/blackbox-exporter
+    container_name: blackbox
+    ports:
+      - "9115:9115"
+    volumes:
+      - ./blackbox:/etc/blackbox_exporter
+    restart: unless-stopped
+
 
 volumes:
   grafana-data:

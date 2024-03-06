@@ -1,0 +1,10 @@
+modules:
+  dns:
+    prober: dns
+    dns:
+      transport_protocol: tcp
+      preferred_ip_protocol: ip4
+      query_name: home.trox.dev
+      query_type: "A"
+      valid_rcodes:
+        - NOERROR
