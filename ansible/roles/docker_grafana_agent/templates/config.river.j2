@@ -13,10 +13,10 @@ loki.relabel "journal" {
 
 
 loki.source.journal "host_journal" {
-    path = "/ext_logs"
+    path = "/ext_logs/journal"
     forward_to = [loki.write.default.receiver]
     relabel_rules = loki.relabel.journal.rules
-    labels = {env = "homelab", source = "journal"}
+    labels = {env = "homelab", source = "journal", instance = "{{ inventory_hostname }}"}
 }
 
 loki.source.file "local_files" {

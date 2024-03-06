@@ -1,7 +1,7 @@
 - name: Prepare files
-  ansible.builtin.copy:
-    src: files/
-    dest: /srv/docker/grafana_agent/
+  ansible.builtin.template:
+    src: config.river.j2
+    dest: /srv/docker/grafana_agent/config.river
     mode: "0644"
   register: files
 

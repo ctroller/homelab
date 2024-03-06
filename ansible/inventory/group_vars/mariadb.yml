@@ -5,5 +5,5 @@ mariadb_users:
   - name: "{{ mysqld_exporter_username }}"
     host: "localhost"
     password: "{{ mysqld_exporter_password }}"
-    priv: "*.*:PROCESS,REPLICATION CLIENT"
+    priv: "*.*:PROCESS,REPLICATION CLIENT,REPLICATION SLAVE,SLAVE MONITOR"
     state: present
