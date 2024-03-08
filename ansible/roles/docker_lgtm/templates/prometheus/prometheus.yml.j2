@@ -72,10 +72,9 @@ scrape_configs:
       module: [dns]
     static_configs:
       - targets:
-        - 8.8.4.4  # Test various public DNS providers are working.
-        - 8.8.8.8
-        - 1.0.0.1
         - 1.1.1.1
+        - 45.90.28.22
+        - 45.90.30.22
         - 192.168.0.2
     relabel_configs:
       - source_labels: [__address__]
