@@ -20,3 +20,22 @@
       - filesystem:
           ignored-mount-points: ^/(dev|proc|sys|var/lib/docker/(containers|devicemapper|overlay2)/.+)($|/)
           ignored-fs-types: "^(sys|proc|auto|te?mp|ram|ns)fs$"
+
+  tasks:
+    # --grant-all-permissions is true by default
+    - name: Install loki docker driver
+      community.docker.docker_plugin:
+        plugin_name: grafana/loki-docker-driver:latest
+        alias: loki
+        state: enable
+
+    - name: Configure default logging driver
+      ansible.builtin.copy:
+        src: files/docker-daemon.json
+        dest: /etc/docker/daemon.json
+        mode: "0644"
+  
+    - name: Restart docker
+      ansible.builtin.service:
+        name: docker
+        state: restarted
