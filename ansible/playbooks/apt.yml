@@ -14,4 +14,7 @@
       ansible.builtin.apt:
         pkg:
           - htop
+          - iputils-ping
+          - net-tools
+          - lsof
         state: present

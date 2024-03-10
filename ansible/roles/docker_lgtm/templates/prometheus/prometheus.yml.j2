@@ -72,10 +72,9 @@ scrape_configs:
       module: [dns]
     static_configs:
       - targets:
-        - 1.1.1.1
-        - 45.90.28.22
-        - 45.90.30.22
+        - 9.9.9.9
         - 192.168.0.2
+        - 192.168.10.5
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target

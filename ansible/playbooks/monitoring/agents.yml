@@ -34,8 +34,10 @@
         src: files/docker-daemon.json
         dest: /etc/docker/daemon.json
         mode: "0644"
+      register: logging
   
     - name: Restart docker
       ansible.builtin.service:
         name: docker
         state: restarted
+      when: logging.changed

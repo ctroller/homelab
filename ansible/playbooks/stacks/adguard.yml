@@ -1,0 +1,35 @@
+- name: Manages Docker
+  hosts: adguard
+  become: true
+  roles:
+    - docker_adguard
+
+  pre_tasks:
+    - name: Check resolved conf is used
+      ansible.builtin.stat:
+        path: /etc/systemd/resolved.conf
+      register: resolved_file
+
+    - name: Check resolved service is used
+      ansible.builtin.systemd:
+        name: systemd-resolved
+      register: resolved_service
+      when: resolved_file.stat.exists
+
+    - name: Set resolved configuration
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/resolved.conf
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      loop:
+        - { regexp: "^#?DNS=.*$", line: 'DNS=127.0.0.1' }
+        - { regexp: "^#?DNSStubListener=.*$", line: 'DNSStubListener=no' }
+      register: resolved_conf
+      when: resolved_file.stat.exists and resolved_service.status.ActiveState
+  
+    - name: Restart resolved
+      ansible.builtin.systemd:
+        name: systemd-resolved
+        state: restarted
+      when: resolved_conf.changed

@@ -1,0 +1,11 @@
+- name: Copy files
+  ansible.builtin.copy:
+    src: files/
+    dest: "{{ stack_location }}"
+    mode: "0644"
+  register: files
+
+- name: Deploy docker stack
+  community.docker.docker_compose_v2:
+    project_src: "{{ stack_location }}"
+    recreate: "{{ 'always' if files.changed else 'auto' }}"
