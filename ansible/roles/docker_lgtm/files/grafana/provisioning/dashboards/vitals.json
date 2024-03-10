@@ -1582,7 +1582,7 @@
           "exemplar": false,
           "expr": "sum by (duration, instance) (probe_dns_duration_seconds)",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "__auto",
