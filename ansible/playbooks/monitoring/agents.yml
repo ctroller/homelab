@@ -1,5 +1,5 @@
 - name: Manages Monitoring agents on all hosts
-  hosts: all
+  hosts: adguard
   roles:
     - geerlingguy.docker
     - geerlingguy.pip
@@ -21,7 +21,7 @@
           ignored-mount-points: ^/(dev|proc|sys|var/lib/docker/(containers|devicemapper|overlay2)/.+)($|/)
           ignored-fs-types: "^(sys|proc|auto|te?mp|ram|ns)fs$"
 
-  tasks:
+  pre_tasks:
     # --grant-all-permissions is true by default
     - name: Install loki docker driver
       community.docker.docker_plugin:
@@ -34,10 +34,3 @@
         src: files/docker-daemon.json
         dest: /etc/docker/daemon.json
         mode: "0644"
-      register: logging
-  
-    - name: Restart docker
-      ansible.builtin.service:
-        name: docker
-        state: restarted
-      when: logging.changed

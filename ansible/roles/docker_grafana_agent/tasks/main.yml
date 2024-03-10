@@ -1,3 +1,9 @@
+- name: Create directory
+  ansible.builtin.file:
+    path: /srv/docker/grafana_agent
+    state: directory
+    mode: "0644"
+
 - name: Prepare files
   ansible.builtin.template:
     src: config.river.j2

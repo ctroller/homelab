@@ -68,9 +68,10 @@
     },
     {
       "datasource": {
-        "type": "influxdb",
-        "uid": "P856BBD467B9B82E4"
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -83,47 +84,65 @@
             },
             "inspect": false
           },
-          "decimals": 2,
-          "fieldMinMax": true,
+          "decimals": 1,
           "links": [
             {
               "targetBlank": true,
-              "title": "Node Exporter",
-              "url": "https://grafana.home.trox.dev/d/rYdddlPWk/node-exporter-full?var-node=${__data.fields.host}.trox.lan:9100"
+              "title": "",
+              "url": "https://grafana.home.trox.dev/d/rYdddlPWk/node-exporter-full?var-node=${__data.fields.instance}"
             }
           ],
           "mappings": [
             {
               "options": {
-                "0": {
-                  "color": "semi-dark-red",
-                  "index": 0
+                "match": "null",
+                "result": {
+                  "text": "N/A"
                 }
               },
-              "type": "value"
+              "type": "special"
             }
           ],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "rgba(50, 172, 45, 0.97)",
                 "value": null
               }
             ]
-          }
+          },
+          "unit": "percent"
         },
         "overrides": [
           {
             "matcher": {
               "id": "byName",
-              "options": "cpu (last)"
+              "options": "Value #uptime (lastNotNull)"
             },
             "properties": [
               {
                 "id": "unit",
-                "value": "percentunit"
+                "value": "s"
               },
+              {
+                "id": "custom.width",
+                "value": 100
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value #cpu (lastNotNull)"
+            },
+            "properties": [
               {
                 "id": "thresholds",
                 "value": {
@@ -135,33 +154,37 @@
                     },
                     {
                       "color": "#EAB839",
-                      "value": 0.5
+                      "value": 50
                     },
                     {
                       "color": "red",
-                      "value": 0.8
+                      "value": 80
                     }
                   ]
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               },
               {
                 "id": "custom.cellOptions",
                 "value": {
                   "type": "color-text"
                 }
-              },
-              {
-                "id": "custom.width",
-                "value": 100
               }
             ]
           },
           {
             "matcher": {
               "id": "byName",
-              "options": "mem (last)"
+              "options": "Value #mem (lastNotNull)"
             },
             "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
+              },
               {
                 "id": "unit",
                 "value": "decbytes"
@@ -171,13 +194,9 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "mem%"
+              "options": "Value #mem% (lastNotNull)"
             },
             "properties": [
-              {
-                "id": "unit",
-                "value": "percentunit"
-              },
               {
                 "id": "thresholds",
                 "value": {
@@ -188,16 +207,14 @@
                       "value": null
                     },
                     {
+                      "color": "semi-dark-orange",
+                      "value": 75
+                    },
+                    {
                       "color": "red",
-                      "value": 0.9
+                      "value": 90
                     }
                   ]
-                }
-              },
-              {
-                "id": "color",
-                "value": {
-                  "mode": "thresholds"
                 }
               },
               {
@@ -206,38 +223,6 @@
                   "type": "color-text"
                 }
               },
-              {
-                "id": "custom.width",
-                "value": 100
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "uptime (last)"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "s"
-              },
-              {
-                "id": "decimals",
-                "value": 1
-              },
-              {
-                "id": "custom.width",
-                "value": 100
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "mem (last)"
-            },
-            "properties": [
               {
                 "id": "custom.width",
                 "value": 100
@@ -252,193 +237,161 @@
         "x": 3,
         "y": 1
       },
-      "id": 3,
+      "id": 27,
       "options": {
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
-          "enablePagination": false,
           "fields": "",
           "reducer": [
             "sum"
           ],
           "show": false
         },
-        "showHeader": true
+        "frameIndex": 0,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "instance"
+          }
+        ]
       },
       "pluginVersion": "10.4.0",
       "targets": [
         {
           "datasource": {
-            "type": "influxdb",
-            "uid": "P856BBD467B9B82E4"
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
           },
-          "groupBy": [],
-          "measurement": "system",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT \"cpu\", \"mem\", \"maxmem\", \"host\" FROM \"system\" WHERE $timeFilter",
-          "rawQuery": false,
-          "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "cpu"
-                ],
-                "type": "field"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "mem"
-                ],
-                "type": "field"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "maxmem"
-                ],
-                "type": "field"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "host"
-                ],
-                "type": "field"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "uptime"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": []
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(sum by(instance) (irate(node_cpu_seconds_total{job=\"node_exporter\", mode!=\"idle\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{job=\"node_exporter\"}[$__rate_interval])))) * 100",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "range": false,
+          "refId": "cpu",
+          "step": 240
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{job=\"node_exporter\"} - node_memory_MemFree_bytes - (node_memory_Cached_bytes + node_memory_Buffers_bytes + node_memory_SReclaimable_bytes)",
+          "format": "table",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "mem"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "100 - ((avg_over_time(node_memory_MemAvailable_bytes{job=\"node_exporter\"}[$__rate_interval]) * 100) / avg_over_time(node_memory_MemTotal_bytes{job=\"node_exporter\"}[$__rate_interval]))",
+          "format": "table",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "mem%"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_time_seconds{job=\"node_exporter\"} - node_boot_time_seconds{job=\"node_exporter\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "uptime"
         }
       ],
-      "title": "VM Status",
+      "title": "Homelab Status",
       "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
         {
           "id": "groupBy",
           "options": {
             "fields": {
-              "cpu": {
+              "Value #A": {
                 "aggregations": [
-                  "last"
+                  "lastNotNull"
                 ],
                 "operation": "aggregate"
               },
-              "host": {
-                "aggregations": [],
+              "Value #B": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #C": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #D": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #cpu": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #mem": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #mem%": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "Value #uptime": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "instance": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
                 "operation": "groupby"
-              },
-              "maxmem": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "mem": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
-              },
-              "uptime": {
-                "aggregations": [
-                  "last"
-                ],
-                "operation": "aggregate"
               }
             }
           }
         },
         {
-          "id": "calculateField",
+          "id": "renameByRegex",
           "options": {
-            "alias": "mem%",
-            "binary": {
-              "left": "mem (last)",
-              "operator": "/",
-              "right": "maxmem (last)"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": false
-          }
-        },
-        {
-          "id": "filterFieldsByName",
-          "options": {
-            "include": {
-              "names": [
-                "host",
-                "cpu (last)",
-                "mem (last)",
-                "mem%",
-                "uptime (last)"
-              ]
-            }
-          }
-        },
-        {
-          "id": "sortBy",
-          "options": {
-            "fields": {},
-            "sort": [
-              {
-                "field": "host"
-              }
-            ]
-          }
-        },
-        {
-          "id": "filterByValue",
-          "options": {
-            "filters": [
-              {
-                "config": {
-                  "id": "regex",
-                  "options": {
-                    "value": ".*-template|pve"
-                  }
-                },
-                "fieldName": "host"
-              }
-            ],
-            "match": "any",
-            "type": "exclude"
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {},
-            "includeByName": {},
-            "indexByName": {
-              "cpu (last)": 1,
-              "host": 0,
-              "mem (last)": 2,
-              "mem%": 3,
-              "uptime (last)": 4
-            },
-            "renameByName": {
-              "cpu (last)": "cpu",
-              "mem (last)": "mem",
-              "uptime (last)": "uptime"
-            }
+            "regex": "Value #(.*)? .*",
+            "renamePattern": "$1"
           }
         }
       ],
@@ -2116,15 +2069,15 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -2156,8 +2109,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "#EAB839",
@@ -2198,8 +2150,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "dark-yellow",
@@ -2330,7 +2281,7 @@
           }
         ]
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -2512,15 +2463,15 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -2552,8 +2503,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "rgba(245, 54, 54, 0.9)",
-                      "value": null
+                      "color": "rgba(245, 54, 54, 0.9)"
                     },
                     {
                       "color": "rgba(237, 129, 40, 0.89)",
@@ -2598,8 +2548,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#d8d9da",
-                      "value": null
+                      "color": "#d8d9da"
                     },
                     {
                       "color": "#37872D",
@@ -2640,8 +2589,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#d8d9da",
-                      "value": null
+                      "color": "#d8d9da"
                     },
                     {
                       "color": "#C4162A",
@@ -2698,8 +2646,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "rgba(245, 54, 54, 0.9)",
-                      "value": null
+                      "color": "rgba(245, 54, 54, 0.9)"
                     },
                     {
                       "color": "rgba(237, 129, 40, 0.89)"
@@ -2975,7 +2922,7 @@
           }
         ]
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -3095,8 +3042,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent",
-                "value": null
+                "color": "transparent"
               },
               {
                 "color": "#37872D",
@@ -3104,7 +3050,8 @@
               }
             ]
           },
-          "unit": "Bps"
+          "unit": "Bps",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -3133,7 +3080,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -3161,8 +3108,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "orange",
@@ -3174,7 +3120,8 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "decbytes",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -3203,7 +3150,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -3245,8 +3192,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red",
-                "value": null
+                "color": "dark-red"
               },
               {
                 "color": "orange",
@@ -3258,7 +3204,8 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "short",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -3285,7 +3232,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -3329,8 +3276,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3338,7 +3284,8 @@
               }
             ]
           },
-          "unit": "bytes"
+          "unit": "bytes",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -3366,7 +3313,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -3407,8 +3354,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgb(33, 33, 35)",
-                "value": null
+                "color": "rgb(33, 33, 35)"
               },
               {
                 "color": "rgba(237, 158, 40, 0.89)",
@@ -3419,7 +3365,8 @@
               }
             ]
           },
-          "unit": "Bps"
+          "unit": "Bps",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -3448,7 +3395,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -3489,8 +3436,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3498,7 +3444,8 @@
               }
             ]
           },
-          "unit": "dtdurations"
+          "unit": "dtdurations",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -3526,7 +3473,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -3559,8 +3506,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "semi-dark-red",
-                "value": null
+                "color": "semi-dark-red"
               },
               {
                 "color": "#EF843C",
@@ -3576,7 +3522,8 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -3605,7 +3552,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -3675,7 +3622,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
