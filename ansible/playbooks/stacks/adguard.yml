@@ -26,10 +26,11 @@
         - { regexp: "^#?DNS=.*$", line: 'DNS=127.0.0.1' }
         - { regexp: "^#?DNSStubListener=.*$", line: 'DNSStubListener=no' }
       register: resolved_conf
-      when: resolved_file.stat.exists and resolved_service.status.ActiveState
-  
+      when: resolved_file.stat.exists and resolved_service.status.resolved_service.status.ActiveState
+      notify: Restart resolved
+
+  handlers:
     - name: Restart resolved
       ansible.builtin.systemd:
         name: systemd-resolved
         state: restarted
-      when: resolved_conf.changed

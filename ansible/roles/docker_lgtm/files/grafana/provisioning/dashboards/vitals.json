@@ -250,12 +250,7 @@
         },
         "frameIndex": 0,
         "showHeader": true,
-        "sortBy": [
-          {
-            "desc": false,
-            "displayName": "instance"
-          }
-        ]
+        "sortBy": []
       },
       "pluginVersion": "10.4.0",
       "targets": [
@@ -266,12 +261,12 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(sum by(instance) (irate(node_cpu_seconds_total{job=\"node_exporter\", mode!=\"idle\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{job=\"node_exporter\"}[$__rate_interval])))) * 100",
+          "expr": "(sum by(instance_friendly_name) (irate(node_cpu_seconds_total{job=\"node_exporter\", mode!=\"idle\"}[$__rate_interval])) / on(instance_friendly_name) group_left sum by (instance_friendly_name)((irate(node_cpu_seconds_total{job=\"node_exporter\"}[$__rate_interval])))) * 100",
           "format": "table",
           "hide": false,
           "instant": true,
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "__auto",
           "range": false,
           "refId": "cpu",
           "step": 240
@@ -381,6 +376,11 @@
               "instance": {
                 "aggregations": [
                   "lastNotNull"
+                ]
+              },
+              "instance_friendly_name": {
+                "aggregations": [
+                  "lastNotNull"
                 ],
                 "operation": "groupby"
               }
@@ -392,6 +392,17 @@
           "options": {
             "regex": "Value #(.*)? .*",
             "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "instance"
+              }
+            ]
           }
         }
       ],

@@ -16,11 +16,12 @@
       {{ (managed_files + managed_templates) | map("regex_replace", "^(.*)$", stack_location + "/prometheus/\1") | map("regex_replace", "\.j2$", "") }}
     managed_dirs: >
       {{ ['.'] + ((templates_dirs + files_dirs) | list) }}
-      
+
 - name: Create directories
   ansible.builtin.file:
     path: "{{ stack_location }}/prometheus/{{ item }}"
     state: directory
+    mode: "0644"
   loop: "{{ managed_dirs }}"
   loop_control:
     label: "{{ item }}"

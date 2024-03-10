@@ -1,4 +1,3 @@
-
 - name: Set grafana managed files
   ansible.builtin.set_fact:
     templates_dirs: >
@@ -17,11 +16,12 @@
       {{ (managed_files + managed_templates) | map("regex_replace", "^(.*)$", stack_location + "/grafana/\1") | map("regex_replace", "\.j2$", "") | list }}
     managed_dirs: >
       {{ ['.'] + ((templates_dirs + files_dirs) | list) }}
-      
+
 - name: Create directories
   ansible.builtin.file:
     path: "{{ stack_location }}/grafana/{{ item }}"
     state: directory
+    mode: "0644"
   loop: "{{ managed_dirs }}"
   loop_control:
     label: "{{ item }}"
