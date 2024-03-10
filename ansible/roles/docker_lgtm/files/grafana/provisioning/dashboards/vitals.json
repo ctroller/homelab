@@ -89,7 +89,7 @@
             {
               "targetBlank": true,
               "title": "",
-              "url": "https://grafana.home.trox.dev/d/rYdddlPWk/node-exporter-full?var-node=${__data.fields.instance}"
+              "url": "https://grafana.home.trox.dev/d/rYdddlPWk/node-exporter-full?var-node=${__data.fields.instance}.trox.lan:9100"
             }
           ],
           "mappings": [
