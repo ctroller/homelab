@@ -6,6 +6,9 @@
     - prometheus.prometheus.cadvisor
     - docker_watchtower
 
+  vars:
+    docker_prune: false
+
   pre_tasks:
     - name: Create docker group
       ansible.builtin.group:
@@ -18,13 +21,20 @@
         uid: 1000
 
   tasks:
+    - name: Prune docker
+      ansible.builtin.shell: docker system prune -f
+      when: docker_prune
+
     - name: Update cadvisor service template
       ansible.builtin.lineinfile:
         path: /etc/systemd/system/cadvisor.service
         line: "    '--raw_cgroup_prefix_whitelist=/docker/' \\"
         insertafter: '.*--listen_ip=.*'
+      register: cadvisor_service_updated
+
     - name: Restart cadvisor
       ansible.builtin.systemd:
         name: cadvisor
         daemon_reload: true
         state: restarted
+      when: cadvisor_service_updated.changed
