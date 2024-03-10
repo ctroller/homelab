@@ -228,6 +228,18 @@
                 "value": 100
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "instance_friendly_name"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "instance"
+              }
+            ]
           }
         ]
       },
@@ -2081,8 +2093,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2121,8 +2132,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "#EAB839",
@@ -2163,8 +2173,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "dark-yellow",
@@ -2477,8 +2486,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2517,8 +2525,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "rgba(245, 54, 54, 0.9)",
-                      "value": null
+                      "color": "rgba(245, 54, 54, 0.9)"
                     },
                     {
                       "color": "rgba(237, 129, 40, 0.89)",
@@ -2563,8 +2570,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#d8d9da",
-                      "value": null
+                      "color": "#d8d9da"
                     },
                     {
                       "color": "#37872D",
@@ -2605,8 +2611,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#d8d9da",
-                      "value": null
+                      "color": "#d8d9da"
                     },
                     {
                       "color": "#C4162A",
@@ -2663,8 +2668,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "rgba(245, 54, 54, 0.9)",
-                      "value": null
+                      "color": "rgba(245, 54, 54, 0.9)"
                     },
                     {
                       "color": "rgba(237, 129, 40, 0.89)"
@@ -3060,8 +3064,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent",
-                "value": null
+                "color": "transparent"
               },
               {
                 "color": "#37872D",
@@ -3126,8 +3129,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "orange",
@@ -3210,8 +3212,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red",
-                "value": null
+                "color": "dark-red"
               },
               {
                 "color": "orange",
@@ -3294,8 +3295,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3372,8 +3372,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgb(33, 33, 35)",
-                "value": null
+                "color": "rgb(33, 33, 35)"
               },
               {
                 "color": "rgba(237, 158, 40, 0.89)",
@@ -3454,8 +3453,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -3524,8 +3522,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "semi-dark-red",
-                "value": null
+                "color": "semi-dark-red"
               },
               {
                 "color": "#EF843C",
@@ -3647,6 +3644,6 @@
   "timezone": "",
   "title": "Homelab Vitals",
   "uid": "e3b40573-041b-4481-a46e-aaf42da7258a",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }

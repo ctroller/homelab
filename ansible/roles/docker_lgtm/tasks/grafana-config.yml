@@ -21,7 +21,6 @@
   ansible.builtin.file:
     path: "{{ stack_location }}/grafana/{{ item }}"
     state: directory
-    mode: "0644"
   loop: "{{ managed_dirs }}"
   loop_control:
     label: "{{ item }}"
