@@ -1560,11 +1560,14 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "mean"
           ],
           "displayMode": "table",
           "placement": "right",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Mean",
+          "sortDesc": false
         },
         "tooltip": {
           "mode": "multi",
@@ -1582,7 +1585,7 @@
           "exemplar": false,
           "expr": "sum by (duration, instance) (probe_dns_duration_seconds)",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "__auto",
