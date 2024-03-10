@@ -107,11 +107,11 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -130,8 +130,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "#EAB839",
@@ -184,8 +183,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "red",
@@ -266,7 +264,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -463,8 +461,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -472,7 +469,8 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -502,7 +500,7 @@
         "text": {},
         "valueMode": "color"
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -543,8 +541,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -552,7 +549,8 @@
               }
             ]
           },
-          "unit": "s"
+          "unit": "s",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -581,7 +579,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -630,8 +628,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "color": "rgba(50, 172, 45, 0.97)"
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -643,7 +640,8 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -669,7 +667,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -720,8 +718,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "color": "rgba(50, 172, 45, 0.97)"
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -733,7 +730,8 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -759,7 +757,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -799,8 +797,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "color": "rgba(50, 172, 45, 0.97)"
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -812,7 +809,8 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -839,7 +837,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -906,8 +904,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
+                "color": "rgba(50, 172, 45, 0.97)"
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
@@ -919,7 +916,8 @@
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percent",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -945,7 +943,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -984,8 +982,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -993,7 +990,8 @@
               }
             ]
           },
-          "unit": "celsius"
+          "unit": "celsius",
+          "unitScale": true
         },
         "overrides": []
       },
@@ -1022,7 +1020,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -1089,8 +1087,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1098,7 +1095,8 @@
               }
             ]
           },
-          "unit": "bps"
+          "unit": "bps",
+          "unitScale": true
         },
         "overrides": [
           {
@@ -1587,7 +1585,9 @@
           ],
           "displayMode": "table",
           "placement": "right",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": false
         },
         "tooltip": {
           "mode": "multi",
@@ -1603,9 +1603,9 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (instance) (probe_dns_duration_seconds)",
+          "expr": "sum by (duration, instance) (probe_dns_duration_seconds)",
           "format": "time_series",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "__auto",
@@ -1653,15 +1653,15 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": [
           {
@@ -1676,8 +1676,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "yellow",
@@ -1891,8 +1890,7 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green",
-                      "value": null
+                      "color": "green"
                     },
                     {
                       "color": "yellow",
@@ -1946,7 +1944,7 @@
           }
         ]
       },
-      "pluginVersion": "10.4.0",
+      "pluginVersion": "10.3.3",
       "targets": [
         {
           "datasource": {
@@ -3669,7 +3667,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
