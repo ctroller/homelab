@@ -1560,7 +1560,8 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "lastNotNull",
+            "mean"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -3644,6 +3645,6 @@
   "timezone": "",
   "title": "Homelab Vitals",
   "uid": "e3b40573-041b-4481-a46e-aaf42da7258a",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }
