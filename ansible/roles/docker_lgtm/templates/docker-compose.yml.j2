@@ -62,6 +62,7 @@ services:
       - --web.enable-remote-write-receiver
     volumes:
       - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
     ports:
       - "9090:9090"
     restart: unless-stopped
@@ -136,3 +137,4 @@ volumes:
   minio-data:
   influxdb-data:
   tempo-data:
+  prometheus-data:
