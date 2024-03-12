@@ -1,5 +1,5 @@
 - name: Manages Monitoring agents on all hosts
-  hosts: adguard
+  hosts: all
   roles:
     - geerlingguy.docker
     - geerlingguy.pip
@@ -16,10 +16,10 @@
     node_exporter_enabled_collectors:
       - systemd
       - textfile:
-          directory: "{{ node_exporter_textfile_dir }}"
+          directory: '{{ node_exporter_textfile_dir }}'
       - filesystem:
           ignored-mount-points: ^/(dev|proc|sys|var/lib/docker/(containers|devicemapper|overlay2)/.+)($|/)
-          ignored-fs-types: "^(sys|proc|auto|te?mp|ram|ns)fs$"
+          ignored-fs-types: '^(sys|proc|auto|te?mp|ram|ns)fs$'
 
   pre_tasks:
     # --grant-all-permissions is true by default
@@ -33,4 +33,4 @@
       ansible.builtin.copy:
         src: files/docker-daemon.json
         dest: /etc/docker/daemon.json
-        mode: "0644"
+        mode: '0644'
