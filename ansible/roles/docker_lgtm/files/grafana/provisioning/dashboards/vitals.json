@@ -327,7 +327,7 @@
           "refId": "uptime"
         }
       ],
-      "timeFrom": "5m",
+      "timeFrom": "10m",
       "title": "Homelab Status",
       "transformations": [
         {
@@ -2094,7 +2094,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2133,7 +2134,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green"
+                      "color": "green",
+                      "value": null
                     },
                     {
                       "color": "#EAB839",
@@ -2174,7 +2176,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "green"
+                      "color": "green",
+                      "value": null
                     },
                     {
                       "color": "dark-yellow",
@@ -2487,7 +2490,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2526,7 +2530,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "rgba(245, 54, 54, 0.9)"
+                      "color": "rgba(245, 54, 54, 0.9)",
+                      "value": null
                     },
                     {
                       "color": "rgba(237, 129, 40, 0.89)",
@@ -2571,7 +2576,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#d8d9da"
+                      "color": "#d8d9da",
+                      "value": null
                     },
                     {
                       "color": "#37872D",
@@ -2612,7 +2618,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "#d8d9da"
+                      "color": "#d8d9da",
+                      "value": null
                     },
                     {
                       "color": "#C4162A",
@@ -2669,7 +2676,8 @@
                   "mode": "absolute",
                   "steps": [
                     {
-                      "color": "rgba(245, 54, 54, 0.9)"
+                      "color": "rgba(245, 54, 54, 0.9)",
+                      "value": null
                     },
                     {
                       "color": "rgba(237, 129, 40, 0.89)"
@@ -3065,7 +3073,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "transparent"
+                "color": "transparent",
+                "value": null
               },
               {
                 "color": "#37872D",
@@ -3130,7 +3139,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               },
               {
                 "color": "orange",
@@ -3213,7 +3223,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "dark-red"
+                "color": "dark-red",
+                "value": null
               },
               {
                 "color": "orange",
@@ -3296,7 +3307,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3373,7 +3385,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgb(33, 33, 35)"
+                "color": "rgb(33, 33, 35)",
+                "value": null
               },
               {
                 "color": "rgba(237, 158, 40, 0.89)",
@@ -3454,7 +3467,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3523,7 +3537,8 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "semi-dark-red"
+                "color": "semi-dark-red",
+                "value": null
               },
               {
                 "color": "#EF843C",
@@ -3645,6 +3660,6 @@
   "timezone": "",
   "title": "Homelab Vitals",
   "uid": "e3b40573-041b-4481-a46e-aaf42da7258a",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }

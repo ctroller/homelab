@@ -3,3 +3,6 @@
   roles:
     - fauust.mariadb
     - prometheus.prometheus.mysqld_exporter
+
+  vars_files:
+    - ../../.vault

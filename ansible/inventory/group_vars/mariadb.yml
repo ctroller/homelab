@@ -7,3 +7,7 @@ mariadb_users:
     password: "{{ mysqld_exporter_password }}"
     priv: "*.*:PROCESS,REPLICATION CLIENT,REPLICATION SLAVE,SLAVE MONITOR"
     state: present
+  - name: phpipam
+    password: "{{ phpipam_db_password }}"
+    priv: "phpipam.*:ALL"
+    state: present
