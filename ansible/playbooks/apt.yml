@@ -1,6 +1,19 @@
 - name: Manage apt packages
   hosts: all
   tasks:
+    - name: Find old apt sources
+      ansible.builtin.find:
+        paths: /etc/apt/sources.list.d/
+        patterns: 'packages_treasuredata_*'
+      register: apt_old_sources
+
+    - name: Remove old sources
+      ansible.builtin.file:
+        path: '{{ item.path }}'
+        state: absent
+      loop: '{{ apt_old_sources.files }}'
+      when: apt_old_sources.matched > 0
+
     - name: Update & Upgrade
       ansible.builtin.apt:
         upgrade: true

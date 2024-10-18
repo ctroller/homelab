@@ -2,5 +2,4 @@
 
 ansible-playbook playbooks/apt.yml
 ansible-playbook playbooks/docker.yml
-ansible-playbook playbooks/monitoring/agents.yml
-ansible-playbook playbooks/monitoring/promconfig.yml
+./update_monitoring_hosts.sh

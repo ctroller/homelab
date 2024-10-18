@@ -21,7 +21,7 @@ groups:
           description: "The node is under heavy memory pressure. High rate of major page faults\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
       - alert: HostMemoryIsUnderutilized
-        expr: '(100 - (avg_over_time(node_memory_MemAvailable_bytes{instance!~"(pve|downloader|plexbox).trox.lan:9100"}[30m]) / node_memory_MemTotal_bytes * 100) < 20) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
+        expr: '(100 - (avg_over_time(node_memory_MemAvailable_bytes{instance!~"(pve|downloader|plexbox|gameserver).trox.lan:9100"}[30m]) / node_memory_MemTotal_bytes * 100) < 20) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
         for: 1w
         labels:
           severity: info
@@ -48,7 +48,7 @@ groups:
           description: "Host network interfaces are probably sending too much data (> 300 MB/s)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
       - alert: HostUnusualDiskReadRate
-        expr: '(sum by (instance) (rate(node_disk_read_bytes_total[2m])) / 1024 / 1024 > 500) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
+        expr: '(sum by (instance) (rate(node_disk_read_bytes_total[2m])) / 1024 / 1024 > 500) * on(instance) group_left (nodename) node_uname_info{nodename!~"pve"}'
         for: 5m
         labels:
           severity: warning
@@ -57,7 +57,7 @@ groups:
           description: "Disk is probably reading too much data (> 500 MB/s)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
       - alert: HostUnusualDiskWriteRate
-        expr: '(sum by (instance) (rate(node_disk_written_bytes_total[2m])) / 1024 / 1024 > 300) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
+        expr: '(sum by (instance) (rate(node_disk_written_bytes_total[2m])) / 1024 / 1024 > 300) * on(instance) group_left (nodename) node_uname_info{nodename!~"pve"}'
         for: 2m
         labels:
           severity: warning
