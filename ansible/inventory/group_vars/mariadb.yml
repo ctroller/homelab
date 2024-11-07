@@ -1,6 +1,10 @@
 mysqld_exporter_username: "exporter"
 mysqld_exporter_password: "exporter"
 
+mariadb_bind_address: 0.0.0.0
+mariadb_innodb_raw: |
+  innodb_buffer_pool_size = {{ (((ansible_memtotal_mb * 0.8) // 128) * 128) | int }}M
+
 mariadb_users:
   - name: "{{ mysqld_exporter_username }}"
     host: "localhost"
@@ -10,4 +14,8 @@ mariadb_users:
   - name: phpipam
     password: "{{ phpipam_db_password }}"
     priv: "phpipam.*:ALL"
+    state: present
+  - name: paperless
+    password: "{{ paperless_db_password }}"
+    priv: "paperless.*:ALL"
     state: present
