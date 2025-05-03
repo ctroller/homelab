@@ -21,7 +21,7 @@ groups:
           description: "The node is under heavy memory pressure. High rate of major page faults\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
       - alert: HostMemoryIsUnderutilized
-        expr: '(100 - (avg_over_time(node_memory_MemAvailable_bytes{instance!~"(pve|downloader|plexbox|gameserver).trox.lan:9100"}[30m]) / node_memory_MemTotal_bytes * 100) < 20) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
+        expr: '(100 - (avg_over_time(node_memory_MemAvailable_bytes{instance!~"(pve|downloader|plexbox|gameserver).lan:9100"}[30m]) / node_memory_MemTotal_bytes * 100) < 20) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
         for: 1w
         labels:
           severity: info
@@ -93,7 +93,7 @@ groups:
           description: "Disk is almost running out of available inodes (< 10% left)\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
       - alert: HostFilesystemDeviceError
-        expr: 'node_filesystem_device_error{instance!="homeassistant.trox.lan:9100"} == 1'
+        expr: 'node_filesystem_device_error{instance!="homeassistant.lan:9100"} == 1'
         for: 1m
         labels:
           severity: critical
@@ -183,7 +183,7 @@ groups:
           description: "systemd service crashed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
       - alert: HostPhysicalComponentTooHot
-        expr: '((node_hwmon_temp_celsius * ignoring(label) group_left(instance, job, node, sensor) node_hwmon_sensor_label{label!="tctl"} > 75)) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
+        expr: '((node_hwmon_temp_celsius * ignoring(label) group_left(instance, job, node, sensor) node_hwmon_sensor_label{label!="tctl"} > 90)) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}'
         for: 4h
         labels:
           severity: warning

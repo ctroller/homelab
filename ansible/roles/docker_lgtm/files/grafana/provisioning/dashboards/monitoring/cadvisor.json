@@ -781,8 +781,8 @@
         "allValue": ".*",
         "current": {
           "selected": true,
-          "text": "plexbox.trox.lan:8050",
-          "value": "plexbox.trox.lan:8050"
+          "text": "plexbox.lan:8050",
+          "value": "plexbox.lan:8050"
         },
         "datasource": {
           "type": "prometheus",

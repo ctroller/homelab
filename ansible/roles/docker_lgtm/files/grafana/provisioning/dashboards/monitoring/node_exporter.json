@@ -23732,8 +23732,8 @@
       {
         "current": {
           "selected": false,
-          "text": "plexbox.trox.lan:9100",
-          "value": "plexbox.trox.lan:9100"
+          "text": "plexbox.lan:9100",
+          "value": "plexbox.lan:9100"
         },
         "datasource": {
           "type": "prometheus",

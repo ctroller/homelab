@@ -89,7 +89,7 @@
             {
               "targetBlank": true,
               "title": "",
-              "url": "https://grafana.home.trox.dev/d/rYdddlPWk/node-exporter-full?var-node=${__data.fields.instance}.trox.lan:9100"
+              "url": "https://grafana.home.trox.dev/d/rYdddlPWk/node-exporter-full?var-node=${__data.fields.instance}.lan:9100"
             }
           ],
           "mappings": [
@@ -568,7 +568,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "node_time_seconds{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"} - node_boot_time_seconds{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}",
+          "expr": "node_time_seconds{instance=\"pve.lan:9100\",job=\"node_exporter\"} - node_boot_time_seconds{instance=\"pve.lan:9100\",job=\"node_exporter\"}",
           "instant": true,
           "intervalFactor": 1,
           "range": false,
@@ -656,7 +656,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(sum by(instance) (irate(node_cpu_seconds_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\", mode!=\"idle\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval])))) * 100",
+          "expr": "(sum by(instance) (irate(node_cpu_seconds_total{instance=\"pve.lan:9100\",job=\"node_exporter\", mode!=\"idle\"}[$__rate_interval])) / on(instance) group_left sum by (instance)((irate(node_cpu_seconds_total{instance=\"pve.lan:9100\",job=\"node_exporter\"}[$__rate_interval])))) * 100",
           "hide": false,
           "instant": true,
           "intervalFactor": 1,
@@ -746,7 +746,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg_over_time(node_load15{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) * 100 / on(instance) group_left sum by (instance)(irate(node_cpu_seconds_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]))",
+          "expr": "avg_over_time(node_load15{instance=\"pve.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) * 100 / on(instance) group_left sum by (instance)(irate(node_cpu_seconds_total{instance=\"pve.lan:9100\",job=\"node_exporter\"}[$__rate_interval]))",
           "hide": false,
           "instant": true,
           "intervalFactor": 1,
@@ -826,7 +826,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "((avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) - avg_over_time(node_memory_MemFree_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval])) / (avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) )) * 100",
+          "expr": "((avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) - avg_over_time(node_memory_MemFree_bytes{instance=\"pve.lan:9100\",job=\"node_exporter\"}[$__rate_interval])) / (avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) )) * 100",
           "format": "time_series",
           "hide": true,
           "instant": true,
@@ -842,7 +842,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "100 - ((avg_over_time(node_memory_MemAvailable_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) * 100) / avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\"}[$__rate_interval]))",
+          "expr": "100 - ((avg_over_time(node_memory_MemAvailable_bytes{instance=\"pve.lan:9100\",job=\"node_exporter\"}[$__rate_interval]) * 100) / avg_over_time(node_memory_MemTotal_bytes{instance=\"pve.lan:9100\",job=\"node_exporter\"}[$__rate_interval]))",
           "format": "time_series",
           "hide": false,
           "instant": true,
@@ -932,7 +932,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "100 - ((avg_over_time(node_filesystem_avail_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\",mountpoint=\"/\",fstype!=\"rootfs\"}[$__rate_interval]) * 100) / avg_over_time(node_filesystem_size_bytes{instance=\"pve.trox.lan:9100\",job=\"node_exporter\",mountpoint=\"/\",fstype!=\"rootfs\"}[$__rate_interval]))",
+          "expr": "100 - ((avg_over_time(node_filesystem_avail_bytes{instance=\"pve.lan:9100\",job=\"node_exporter\",mountpoint=\"/\",fstype!=\"rootfs\"}[$__rate_interval]) * 100) / avg_over_time(node_filesystem_size_bytes{instance=\"pve.lan:9100\",job=\"node_exporter\",mountpoint=\"/\",fstype!=\"rootfs\"}[$__rate_interval]))",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -1466,7 +1466,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "irate(node_network_receive_bytes_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\",device=\"enp114s0\"}[$__rate_interval])*8",
+          "expr": "irate(node_network_receive_bytes_total{instance=\"pve.lan:9100\",job=\"node_exporter\",device=\"enp114s0\"}[$__rate_interval])*8",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "recv {{device}}",
@@ -1480,7 +1480,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "irate(node_network_transmit_bytes_total{instance=\"pve.trox.lan:9100\",job=\"node_exporter\",device=\"enp114s0\"}[$__rate_interval])*8",
+          "expr": "irate(node_network_transmit_bytes_total{instance=\"pve.lan:9100\",job=\"node_exporter\",device=\"enp114s0\"}[$__rate_interval])*8",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "trans {{device}} ",
