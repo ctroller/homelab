@@ -5,4 +5,4 @@
         "loki-url": "https://loki.home.trox.dev/loki/api/v1/push",
         "loki-batch-size": "400"
     }
-}
+}1
